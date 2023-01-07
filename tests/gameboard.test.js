@@ -70,3 +70,63 @@ test("get history of missed shots", () => {
   expect(gameboard.getMissedShots()).toEqual(expect.arrayContaining([0, 1]));
   expect(gameboard.getMissedShots()).toEqual(expect.arrayContaining([0, 2]));
 });
+
+test("place multiple ships on the gameboard", () => {
+  const gameboard = Gameboard();
+  const ship1 = Ship(4);
+  const ship2 = Ship(2);
+  gameboard.placeShip(ship1, [
+    [3, 4],
+    [3, 5],
+    [3, 6],
+    [3, 7],
+  ]);
+  gameboard.placeShip(ship2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  expect(gameboard.getPlacedShips()[0]).toBe(ship1);
+  expect(gameboard.getPlacedShips()[1]).toBe(ship2);
+});
+
+test("one of the gameboard's ships has been sunk", () => {
+  const gameboard = Gameboard();
+  const ship1 = Ship(4);
+  const ship2 = Ship(2);
+  gameboard.placeShip(ship1, [
+    [3, 4],
+    [3, 5],
+    [3, 6],
+    [3, 7],
+  ]);
+  gameboard.placeShip(ship2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  gameboard.receiveAttack([0, 0]);
+  gameboard.receiveAttack([0, 1]);
+  expect(gameboard.getPlacedShips()[1].isSunk()).toBeTruthy();
+});
+
+test("all place ships in the gameboard have been sunk", () => {
+  const gameboard = Gameboard();
+  const ship1 = Ship(4);
+  const ship2 = Ship(2);
+  gameboard.placeShip(ship1, [
+    [3, 4],
+    [3, 5],
+    [3, 6],
+    [3, 7],
+  ]);
+  gameboard.placeShip(ship2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  gameboard.receiveAttack([3, 4]);
+  gameboard.receiveAttack([3, 5]);
+  gameboard.receiveAttack([3, 6]);
+  gameboard.receiveAttack([3, 7]);
+  gameboard.receiveAttack([0, 0]);
+  gameboard.receiveAttack([0, 1]);
+  expect(gameboard.isAllSunk()).toBeTruthy();
+});
