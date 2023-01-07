@@ -128,5 +128,5 @@ test("all place ships in the gameboard have been sunk", () => {
   gameboard.receiveAttack([3, 7]);
   gameboard.receiveAttack([0, 0]);
   gameboard.receiveAttack([0, 1]);
-  expect(gameboard.isAllSunk()).toBeTruthy();
+  expect(gameboard.isAllShipsSunk()).toBeTruthy();
 });
