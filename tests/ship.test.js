@@ -2,12 +2,7 @@ const Ship = require("../src/ship");
 
 test("create a ship with 4 length, 0 hit counter, and not sunk", () => {
   const ship = Ship(4);
-  expect(ship).toStrictEqual({
-    getShipLength,
-    getShipHits,
-    hit,
-    isSunk,
-  });
+  expect(typeof ship).toBe("object");
   expect(ship.getShipLength()).toBe(4);
   expect(ship.getShipHits()).toBe(0);
   expect(ship.isSunk()).toBeFalsy();
