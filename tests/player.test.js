@@ -2,27 +2,27 @@ const Ship = require("../src/ship");
 const Gameboard = require("../src/gameboard");
 const Player = require("../src/player");
 
-test("Create a Player", () => {
+test("1) Create a Player", () => {
   const player = Player("human");
   expect(typeof player).toBe("object");
 });
 
-test("Create a human Player", () => {
+test("2) Create a human Player", () => {
   const humanPlayer = Player("human");
   expect(humanPlayer.isComputer()).toBeFalsy();
 });
 
-test("Create a computer Player", () => {
+test("3) Create a computer Player", () => {
   const computerPlayer = Player("computer");
   expect(computerPlayer.isComputer()).toBeTruthy();
 });
 
-test("Player contains a Gameboard", () => {
+test("4) Player contains a Gameboard", () => {
   const player = Player();
   expect(player.getGameboard()).toBeDefined();
 });
 
-test("Player can place a Ship on their Gameboard", () => {
+test("5) Player can place a Ship on their Gameboard", () => {
   const player = Player();
   const gameboard = player.getGameboard();
   const spyGameboardPlaceShip = jest.spyOn(gameboard, "placeShip");
@@ -38,7 +38,7 @@ test("Player can place a Ship on their Gameboard", () => {
   expect(gameboard.getCoordinates([0, 2])).toBeDefined();
 });
 
-test("Player 1 can hit Player 2's Ship", () => {
+test("6) Player 1 can hit Player 2's Ship", () => {
   const player1 = Player();
   const player2 = Player();
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
@@ -58,7 +58,7 @@ test("Player 1 can hit Player 2's Ship", () => {
   expect(player2Ship.getShipHits()).toBe(1);
 });
 
-test("Player 1 misses Player 2's Ship", () => {
+test("7) Player 1 misses Player 2's Ship", () => {
   const player1 = Player();
   const player2 = Player();
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
@@ -78,7 +78,7 @@ test("Player 1 misses Player 2's Ship", () => {
   expect(player2Ship.getShipHits()).toBe(0);
 });
 
-test("Player 1 sinks one of Player 2's Ships", () => {
+test("8) Player 1 sinks one of Player 2's Ships", () => {
   const player1 = Player();
   const player2 = Player();
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
@@ -94,7 +94,7 @@ test("Player 1 sinks one of Player 2's Ships", () => {
   expect(player2Ship2.getShipHits()).toBe(0);
 });
 
-test("Player 1 sinks all of Player 2's Ships", () => {
+test("9) Player 1 sinks all of Player 2's Ships", () => {
   const player1 = Player();
   const player2 = Player();
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
@@ -112,7 +112,7 @@ test("Player 1 sinks all of Player 2's Ships", () => {
   expect(player2.getGameboard().isAllShipsSunk()).toBeTruthy();
 });
 
-test("Computer Player can place their 5 Ships of respective lengths on the Gameboard", () => {
+test("10) Computer Player can place their 5 Ships of respective lengths on the Gameboard", () => {
   const computerPlayer = Player("computer");
   const computerGameboard = computerPlayer.getGameboard();
   const spyGameboardPlaceShip = spyOn(computerGameboard, "placeShip");
@@ -121,7 +121,7 @@ test("Computer Player can place their 5 Ships of respective lengths on the Gameb
   expect(spyGameboardPlaceShip).toHaveBeenCalledTimes(5);
 });
 
-test("Computer Player can send attacks", () => {
+test("11) Computer Player can send attacks", () => {
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
@@ -140,7 +140,7 @@ test("Computer Player can send attacks", () => {
   ).toBe(1);
 });
 
-test("Computer Player is unable to send attacks to the same coordinates twice", () => {
+test("12) Computer Player is unable to send attacks to the same coordinates twice", () => {
   jest.spyOn(Math, "random").mockReturnValue(0.5);
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");

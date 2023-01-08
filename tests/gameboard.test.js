@@ -1,12 +1,12 @@
 const Ship = require("../src/ship");
 const Gameboard = require("../src/gameboard");
 
-test("Create a Gameboard", () => {
+test("1) Create a Gameboard", () => {
   const gameboard = Gameboard();
   expect(typeof gameboard).toBe("object");
 });
 
-test("Place a 4 length Ship on a Gameboard", () => {
+test("2) Place a 4 length Ship on a Gameboard", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -22,7 +22,7 @@ test("Place a 4 length Ship on a Gameboard", () => {
   expect(gameboard.getCoordinates([3, 8])).toBeUndefined();
 });
 
-test("Hit a Ship placed on a Gameboard", () => {
+test("3) Hit a Ship placed on a Gameboard", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -38,7 +38,7 @@ test("Hit a Ship placed on a Gameboard", () => {
   expect(gameboard.getReceivedHitShots()).toEqual([[3, 4]]);
 });
 
-test("Attempt to hit a Ship but miss", () => {
+test("4) Attempt to hit a Ship but miss", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -55,7 +55,7 @@ test("Attempt to hit a Ship but miss", () => {
   expect(gameboard.getReceivedHitShots()).toStrictEqual([]);
 });
 
-test("Get a history of missed shots", () => {
+test("5) Get a history of missed shots", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -72,7 +72,7 @@ test("Get a history of missed shots", () => {
   expect(gameboard.getReceivedMissedShots()).toContainEqual([0, 3]);
 });
 
-test("Place multiple Ships on the Gameboard", () => {
+test("6) Place multiple Ships on the Gameboard", () => {
   const gameboard = Gameboard();
   const ship1 = Ship(4);
   const ship2 = Ship(2);
@@ -90,7 +90,7 @@ test("Place multiple Ships on the Gameboard", () => {
   expect(gameboard.getPlacedShips()[1]).toBe(ship2);
 });
 
-test("Hit a 2 length Ship placed on the Gameboard twice, sinking it", () => {
+test("7) Hit a 2 length Ship placed on the Gameboard twice, sinking it", () => {
   const gameboard = Gameboard();
   const ship1 = Ship(4);
   const ship2 = Ship(2);
@@ -109,7 +109,7 @@ test("Hit a 2 length Ship placed on the Gameboard twice, sinking it", () => {
   expect(gameboard.getPlacedShips()[1].isSunk()).toBeTruthy();
 });
 
-test("Hit all Ships placed on the Gameboard enough times to sink all of the Gameboard's Ships", () => {
+test("8) Hit all Ships placed on the Gameboard enough times to sink all of the Gameboard's Ships", () => {
   const gameboard = Gameboard();
   const ship1 = Ship(4);
   const ship2 = Ship(2);
