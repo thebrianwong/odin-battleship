@@ -81,7 +81,7 @@ test("7) Player 1 misses Player 2's Ship", () => {
   const spyPlayer2ReceiveAttack = jest.spyOn(player2Gameboard, "receiveAttack");
   const spyPlayer2ShipHit = jest.spyOn(player2Ship, "hit");
   player1.sendAttack(player2, [0, 2]);
-  expect(spyPlayer2ReceiveAttack).not.toHaveBeenCalled();
+  expect(spyPlayer2ReceiveAttack).toHaveBeenCalled();
   expect(spyPlayer2ShipHit).not.toHaveBeenCalled();
   expect(player1Gameboard.getSentMissedShots()).toContain([0, 0]);
   expect(player1Gameboard.getSentHitShots()).not.toContain([0, 0]);
