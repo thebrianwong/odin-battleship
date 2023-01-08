@@ -35,7 +35,7 @@ test("Hit a Ship placed on a Gameboard", () => {
   gameboard.receiveAttack([3, 4]);
   expect(spyShipHit).toHaveBeenCalled();
   expect(ship.getShipHits()).toBe(1);
-  expect(gameboard.getHitShots()).toEqual([[3, 4]]);
+  expect(gameboard.getReceivedHitShots()).toEqual([[3, 4]]);
 });
 
 test("Attempt to hit a Ship but miss", () => {
@@ -51,8 +51,8 @@ test("Attempt to hit a Ship but miss", () => {
   gameboard.receiveAttack([0, 0]);
   expect(spyShipHit).not.toHaveBeenCalled();
   expect(ship.getShipHits()).toBe(0);
-  expect(gameboard.getMissedShots()).toStrictEqual([[0, 0]]);
-  expect(gameboard.getHitShots()).toStrictEqual([]);
+  expect(gameboard.getReceivedMissedShots()).toStrictEqual([[0, 0]]);
+  expect(gameboard.getReceivedHitShots()).toStrictEqual([]);
 });
 
 test("Get a history of missed shots", () => {
@@ -67,9 +67,9 @@ test("Get a history of missed shots", () => {
   gameboard.receiveAttack([0, 1]);
   gameboard.receiveAttack([0, 2]);
   gameboard.receiveAttack([0, 3]);
-  expect(gameboard.getMissedShots()).toContainEqual([0, 1]);
-  expect(gameboard.getMissedShots()).toContainEqual([0, 2]);
-  expect(gameboard.getMissedShots()).toContainEqual([0, 3]);
+  expect(gameboard.getReceivedMissedShots()).toContainEqual([0, 1]);
+  expect(gameboard.getReceivedMissedShots()).toContainEqual([0, 2]);
+  expect(gameboard.getReceivedMissedShots()).toContainEqual([0, 3]);
 });
 
 test("Place multiple Ships on the Gameboard", () => {
