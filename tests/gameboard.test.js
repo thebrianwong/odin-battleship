@@ -35,6 +35,7 @@ test("hit a ship on the gameboard", () => {
   gameboard.receiveAttack([3, 4]);
   expect(spyShipHit).toHaveBeenCalled();
   expect(ship.getShipHits()).toBe(1);
+  expect(gameboard.getHitShots()).toEqual([[3, 4]]);
 });
 
 test("hit was a miss", () => {
