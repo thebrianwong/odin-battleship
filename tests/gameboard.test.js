@@ -47,12 +47,12 @@ test("Attempt to hit a Ship but miss", () => {
     [3, 6],
     [3, 7],
   ]);
+  const spyShipHit = jest.spyOn(ship, "hit");
   gameboard.receiveAttack([0, 0]);
-  expect(gameboard.getCoordinates([0, 0])).toHaveBeenCalled();
+  expect(spyShipHit).not.toHaveBeenCalled();
   expect(ship.getShipHits()).toBe(0);
-  expect(
-    gameboard.addToMissedShots([0, 0])
-  ).toHaveBeenCalled(); /* might be private */
+  expect(gameboard.getMissedShots()).toStrictEqual([[0, 0]]);
+  expect(gameboard.getHitShots()).toStrictEqual([]);
 });
 
 test("Get a history of missed shots", () => {
