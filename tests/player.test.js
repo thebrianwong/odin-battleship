@@ -41,8 +41,14 @@ test("5) Player can place a Ship on their Gameboard", () => {
 test("6) Player 1 can hit Player 2's Ship", () => {
   const player1 = Player("human");
   const player2 = Player("human");
-  player1.addShipToGameboard(2, [0, 0], [0, 1]);
-  player2.addShipToGameboard(2, [0, 0], [0, 1]);
+  player1.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  player2.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
   const player1Gameboard = player1.getGameboard();
   const player2Gameboard = player2.getGameboard();
   const player2Ship = player2Gameboard.getPlacedShips()[0];
@@ -61,8 +67,14 @@ test("6) Player 1 can hit Player 2's Ship", () => {
 test("7) Player 1 misses Player 2's Ship", () => {
   const player1 = Player("human");
   const player2 = Player("human");
-  player1.addShipToGameboard(2, [0, 0], [0, 1]);
-  player2.addShipToGameboard(2, [0, 0], [0, 1]);
+  player1.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  player2.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
   const player1Gameboard = player1.getGameboard();
   const player2Gameboard = player2.getGameboard();
   const player2Ship = player2Gameboard.getPlacedShips()[0];
@@ -81,9 +93,18 @@ test("7) Player 1 misses Player 2's Ship", () => {
 test("8) Player 1 sinks one of Player 2's Ships", () => {
   const player1 = Player("human");
   const player2 = Player("human");
-  player1.addShipToGameboard(2, [0, 0], [0, 1]);
-  player2.addShipToGameboard(2, [0, 0], [0, 1]);
-  player2.addShipToGameboard(2, [0, 2], [0, 3]);
+  player1.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  player2.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  player2.addShipToGameboard(2, [
+    [0, 2],
+    [0, 3],
+  ]);
   const player2Ship1 = player2.getGameboard().getPlacedShips()[0];
   const player2Ship2 = player2.getGameboard().getPlacedShips()[1];
   player1.sendAttack(player2, [0, 0]);
@@ -97,9 +118,18 @@ test("8) Player 1 sinks one of Player 2's Ships", () => {
 test("9) Player 1 sinks all of Player 2's Ships", () => {
   const player1 = Player("human");
   const player2 = Player("human");
-  player1.addShipToGameboard(2, [0, 0], [0, 1]);
-  player2.addShipToGameboard(2, [0, 0], [0, 1]);
-  player2.addShipToGameboard(2, [0, 2], [0, 3]);
+  player1.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  player2.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  player2.addShipToGameboard(2, [
+    [0, 2],
+    [0, 3],
+  ]);
   const player2Ship1 = player2.getGameboard().getPlacedShips()[0];
   const player2Ship2 = player2.getGameboard().getPlacedShips()[1];
   player1.sendAttack(player2, [0, 0]);
@@ -145,10 +175,7 @@ test("12) Computer Player is unable to send attacks to the same coordinates twic
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
-  humanPlayer.addShipToGameboard(2, [
-    [0, 0],
-    [0, 1],
-  ]);
+  humanPlayer.addShipToGameboard(2, [[[0, 0]], [[0, 1]]]);
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
   const spyHumanReceiveAttack = spyOn(humanGameboard, "receiveAttack");
