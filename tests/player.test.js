@@ -108,3 +108,59 @@ test("Player 1 sinks all of Player 2's Ships", () => {
   expect(player2Ship2.isSunk()).toBeTruthy();
   expect(player2.getGameboard().isAllShipsSunk()).toBeTruthy();
 });
+
+test("Computer Player can place their 5 Ships of respective lengths on the Gameboard", () => {
+  const computerPlayer = Player("computer");
+  const computerGameboard = computerPlayer.getGameboard();
+  const spyGameboardPlaceShip = spyOn(computerGameboard, "placeShip");
+  computerPlayer.initializeComputerGameboard();
+  expect(computerGameboard.getPlacedShips().length).toBe(5);
+  expect(spyGameboardPlaceShip).toHaveBeenCalledTimes(5);
+});
+
+test("Computer Player can send attacks", () => {
+  const computerPlayer = Player("computer");
+  const humanPlayer = Player("human");
+  computerPlayer.initializeComputerGameboard();
+  humanPlayer.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  const computerGameboard = computerPlayer.getGameboard();
+  const humanGameboard = humanPlayer.getGameboard();
+  const spyHumanReceiveAttack = spyOn(humanGameboard, "receiveAttack");
+  computerPlayer.sendComputerAttack(humanPlayer);
+  expect(spyHumanReceiveAttack).toHaveBeenCalled();
+  expect(
+    computerGameboard.getSentMissedShots().length ||
+      computerGameboard.getSentHitShots().length
+  ).toBe(1);
+});
+
+test("Computer Player is unable to send attacks to the same coordinates twice", () => {
+  jest.spyOn(Math, "random").mockReturnValue(0.5);
+  const computerPlayer = Player("computer");
+  const humanPlayer = Player("human");
+  computerPlayer.initializeComputerGameboard();
+  humanPlayer.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  const computerGameboard = computerPlayer.getGameboard();
+  const humanGameboard = humanPlayer.getGameboard();
+  const spyHumanReceiveAttack = spyOn(humanGameboard, "receiveAttack");
+  computerPlayer.sendComputerAttack(humanPlayer);
+  expect(spyHumanReceiveAttack).toHaveBeenCalled();
+  expect(
+    computerGameboard.getSentMissedShots().length ||
+      computerGameboard.getSentHitShots().length
+  ).toBe(1);
+  computerPlayer.sendComputerAttack(humanPlayer);
+  expect(spyHumanReceiveAttack).not.toHaveBeenCalledTimes(2);
+  expect(
+    computerGameboard.getSentMissedShots().length ||
+      computerGameboard.getSentHitShots().length
+  ).toBe(1);
+  expect(spyHumanReceiveAttack).toHaveBeenCalledTimes(1);
+  jest.spyOn(global.Math, "random").mockRestore();
+});
