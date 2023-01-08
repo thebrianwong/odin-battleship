@@ -67,9 +67,9 @@ test("Get a history of missed shots", () => {
   gameboard.receiveAttack([0, 1]);
   gameboard.receiveAttack([0, 2]);
   gameboard.receiveAttack([0, 3]);
-  expect(gameboard.getMissedShots()).toEqual(expect.arrayContaining([0, 0]));
-  expect(gameboard.getMissedShots()).toEqual(expect.arrayContaining([0, 1]));
-  expect(gameboard.getMissedShots()).toEqual(expect.arrayContaining([0, 2]));
+  expect(gameboard.getMissedShots()).toContainEqual([0, 1]);
+  expect(gameboard.getMissedShots()).toContainEqual([0, 2]);
+  expect(gameboard.getMissedShots()).toContainEqual([0, 3]);
 });
 
 test("Place multiple Ships on the Gameboard", () => {
