@@ -18,12 +18,12 @@ test("3) Create a computer Player", () => {
 });
 
 test("4) Player contains a Gameboard", () => {
-  const player = Player();
+  const player = Player("human");
   expect(player.getGameboard()).toBeDefined();
 });
 
 test("5) Player can place a Ship on their Gameboard", () => {
-  const player = Player();
+  const player = Player("human");
   const gameboard = player.getGameboard();
   const spyGameboardPlaceShip = jest.spyOn(gameboard, "placeShip");
   player.addShipToGameboard(3, [
@@ -39,8 +39,8 @@ test("5) Player can place a Ship on their Gameboard", () => {
 });
 
 test("6) Player 1 can hit Player 2's Ship", () => {
-  const player1 = Player();
-  const player2 = Player();
+  const player1 = Player("human");
+  const player2 = Player("human");
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 0], [0, 1]);
   const player1Gameboard = player1.getGameboard();
@@ -59,8 +59,8 @@ test("6) Player 1 can hit Player 2's Ship", () => {
 });
 
 test("7) Player 1 misses Player 2's Ship", () => {
-  const player1 = Player();
-  const player2 = Player();
+  const player1 = Player("human");
+  const player2 = Player("human");
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 0], [0, 1]);
   const player1Gameboard = player1.getGameboard();
@@ -79,8 +79,8 @@ test("7) Player 1 misses Player 2's Ship", () => {
 });
 
 test("8) Player 1 sinks one of Player 2's Ships", () => {
-  const player1 = Player();
-  const player2 = Player();
+  const player1 = Player("human");
+  const player2 = Player("human");
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 2], [0, 3]);
@@ -95,8 +95,8 @@ test("8) Player 1 sinks one of Player 2's Ships", () => {
 });
 
 test("9) Player 1 sinks all of Player 2's Ships", () => {
-  const player1 = Player();
-  const player2 = Player();
+  const player1 = Player("human");
+  const player2 = Player("human");
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 2], [0, 3]);
