@@ -48,6 +48,12 @@ const Gameboard = () => {
     receivedMissedShots.push(coordinates);
     return "miss";
   };
+  const addSentMissedShot = (coordinates) => {
+    sentMissedShots.push(coordinates);
+  };
+  const addSentHitShot = (coordinates) => {
+    sentHitShots.push(coordinates);
+  };
   return {
     getCoordinates,
     getPlacedShips,
@@ -58,6 +64,8 @@ const Gameboard = () => {
     isAllShipsSunk,
     placeShip,
     receiveAttack,
+    addSentMissedShot,
+    addSentHitShot,
   };
 };
 
