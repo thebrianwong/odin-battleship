@@ -40,6 +40,7 @@ test("Player 1 can hit Player 2's Ship", () => {
   const player2 = Player();
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 0], [0, 1]);
+  const player1Gameboard = player1.getGameboard();
   const player2Gameboard = player2.getGameboard();
   const player2Ship = player2Gameboard.getPlacedShips()[0];
   const spyPlayer2ReceiveAttack = jest.spyOn(player2Gameboard, "receiveAttack");
@@ -47,6 +48,8 @@ test("Player 1 can hit Player 2's Ship", () => {
   player1.sendAttack(player2, [0, 0]);
   expect(spyPlayer2ReceiveAttack).toHaveBeenCalled();
   expect(spyPlayer2ShipHit).toHaveBeenCalled();
+  expect(player1Gameboard.getSentHitShots()).toContain([0, 0]);
+  expect(player1Gameboard.getSentMissedShots()).not.toContain([0, 0]);
   expect(player2Gameboard.getReceivedHitShots()).toContain([0, 0]);
   expect(player2Gameboard.getReceivedMissedShots()).not.toContain([0, 0]);
   expect(player2Ship.getShipHits()).toBe(1);
@@ -57,6 +60,7 @@ test("Player 1 misses Player 2's Ship", () => {
   const player2 = Player();
   player1.addShipToGameboard(2, [0, 0], [0, 1]);
   player2.addShipToGameboard(2, [0, 0], [0, 1]);
+  const player1Gameboard = player1.getGameboard();
   const player2Gameboard = player2.getGameboard();
   const player2Ship = player2Gameboard.getPlacedShips()[0];
   const spyPlayer2ReceiveAttack = jest.spyOn(player2Gameboard, "receiveAttack");
@@ -64,6 +68,8 @@ test("Player 1 misses Player 2's Ship", () => {
   player1.sendAttack(player2, [0, 2]);
   expect(spyPlayer2ReceiveAttack).not.toHaveBeenCalled();
   expect(spyPlayer2ShipHit).not.toHaveBeenCalled();
+  expect(player1Gameboard.getSentMissedShots()).toContain([0, 0]);
+  expect(player1Gameboard.getSentHitShots()).not.toContain([0, 0]);
   expect(player2Gameboard.getReceivedMissedShots()).toContain([0, 0]);
   expect(player2Gameboard.getReceivedHitShots()).not.toContain([0, 0]);
   expect(player2Ship.getShipHits()).toBe(0);
