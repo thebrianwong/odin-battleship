@@ -41,6 +41,8 @@ const Gameboard = () => {
   };
   const getMissedShots = () => missedShots;
   const getHitShots = () => hitShots;
+  const getPlacedShips = () => placedShips;
+  const isAllShipsSunk = () => allShipsSunk;
   return {
     placeShip,
     getCoordinates,
@@ -48,6 +50,8 @@ const Gameboard = () => {
     checkAllShipsSunk,
     getMissedShots,
     getHitShots,
+    getPlacedShips,
+    isAllShipsSunk,
   };
 };
 
