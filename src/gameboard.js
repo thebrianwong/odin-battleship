@@ -14,13 +14,17 @@ const Gameboard = () => {
   const missedShots = [];
   const hitShots = [];
   let allShipsSunk = false;
+  const getCoordinates = (coordinates) => board[coordinates[0]][coordinates[1]];
+  const getPlacedShips = () => placedShips;
+  const getMissedShots = () => missedShots;
+  const getHitShots = () => hitShots;
+  const isAllShipsSunk = () => allShipsSunk;
   const placeShip = (ship, coordinatesList) => {
     for (const coordinates of coordinatesList) {
       board[coordinates[0]][coordinates[1]] = ship;
     }
     placedShips.push(ship);
   };
-  const getCoordinates = (coordinates) => board[coordinates[0]][coordinates[1]];
   const checkAllShipsSunk = () => {
     for (const ship of placedShips) {
       if (!ship.isSunk()) {
@@ -39,19 +43,14 @@ const Gameboard = () => {
       missedShots.push(coordinates);
     }
   };
-  const getMissedShots = () => missedShots;
-  const getHitShots = () => hitShots;
-  const getPlacedShips = () => placedShips;
-  const isAllShipsSunk = () => allShipsSunk;
   return {
-    placeShip,
     getCoordinates,
-    receiveAttack,
-    checkAllShipsSunk,
+    getPlacedShips,
     getMissedShots,
     getHitShots,
-    getPlacedShips,
     isAllShipsSunk,
+    placeShip,
+    receiveAttack,
   };
 };
 
