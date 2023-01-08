@@ -1,6 +1,6 @@
 const Ship = require("../src/ship");
 
-test("create a ship with 4 length, 0 hit counter, and not sunk", () => {
+test("Create a 4 length Ship with default 0 hits and not sunken properties", () => {
   const ship = Ship(4);
   expect(typeof ship).toBe("object");
   expect(ship.getShipLength()).toBe(4);
@@ -8,7 +8,7 @@ test("create a ship with 4 length, 0 hit counter, and not sunk", () => {
   expect(ship.isSunk()).toBeFalsy();
 });
 
-test("create a ship with 3 length, hit it 2 times, increasing hits to 2, but not sunk", () => {
+test("Hit a 3 length Ship twice and increase its hits to 2, but it should not be sunken", () => {
   const ship = Ship(3);
   ship.hit();
   ship.hit();
@@ -16,7 +16,7 @@ test("create a ship with 3 length, hit it 2 times, increasing hits to 2, but not
   expect(ship.isSunk()).toBeFalsy();
 });
 
-test("create a ship with 2 length, hit it 2 times, increasing hits to 2 and sinking it", () => {
+test("Hit a 2 length Ship twice and increase its hits to 2 and sink it", () => {
   const ship = Ship(2);
   ship.hit();
   ship.hit();
@@ -24,7 +24,7 @@ test("create a ship with 2 length, hit it 2 times, increasing hits to 2 and sink
   expect(ship.isSunk()).toBeTruthy();
 });
 
-test("try to hit an already sunken ship", () => {
+test("Attempt to hit an already sunken Ship", () => {
   const ship = Ship(1);
   ship.hit();
   expect(ship.getShipHits()).toBe(1);

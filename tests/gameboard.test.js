@@ -1,12 +1,12 @@
 const Ship = require("../src/ship");
 const Gameboard = require("../src/gameboard");
 
-test("create a gameboard object", () => {
+test("Create a Gameboard", () => {
   const gameboard = Gameboard();
   expect(typeof gameboard).toBe("object");
 });
 
-test("place a length 4 ship on the gameboard", () => {
+test("Place a 4 length Ship on a Gameboard", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -22,7 +22,7 @@ test("place a length 4 ship on the gameboard", () => {
   expect(gameboard.getCoordinates([3, 8])).toBeUndefined();
 });
 
-test("hit a ship on the gameboard", () => {
+test("Hit a Ship placed on a Gameboard", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -38,7 +38,7 @@ test("hit a ship on the gameboard", () => {
   expect(gameboard.getHitShots()).toEqual([[3, 4]]);
 });
 
-test("hit was a miss", () => {
+test("Attempt to hit a Ship but miss", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -55,7 +55,7 @@ test("hit was a miss", () => {
   ).toHaveBeenCalled(); /* might be private */
 });
 
-test("get history of missed shots", () => {
+test("Get a history of missed shots", () => {
   const gameboard = Gameboard();
   const ship = Ship(4);
   gameboard.placeShip(ship, [
@@ -72,7 +72,7 @@ test("get history of missed shots", () => {
   expect(gameboard.getMissedShots()).toEqual(expect.arrayContaining([0, 2]));
 });
 
-test("place multiple ships on the gameboard", () => {
+test("Place multiple Ships on the Gameboard", () => {
   const gameboard = Gameboard();
   const ship1 = Ship(4);
   const ship2 = Ship(2);
@@ -90,7 +90,7 @@ test("place multiple ships on the gameboard", () => {
   expect(gameboard.getPlacedShips()[1]).toBe(ship2);
 });
 
-test("one of the gameboard's ships has been sunk", () => {
+test("Hit a 2 length Ship placed on the Gameboard twice, sinking it", () => {
   const gameboard = Gameboard();
   const ship1 = Ship(4);
   const ship2 = Ship(2);
@@ -109,7 +109,7 @@ test("one of the gameboard's ships has been sunk", () => {
   expect(gameboard.getPlacedShips()[1].isSunk()).toBeTruthy();
 });
 
-test("all place ships in the gameboard have been sunk", () => {
+test("Hit all Ships placed on the Gameboard enough times to sink all of the Gameboard's Ships", () => {
   const gameboard = Gameboard();
   const ship1 = Ship(4);
   const ship2 = Ship(2);
