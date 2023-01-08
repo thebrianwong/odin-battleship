@@ -3,7 +3,7 @@ const Gameboard = require("../src/gameboard");
 const Player = require("../src/player");
 
 test("Create a Player", () => {
-  const player = Player();
+  const player = Player("human");
   expect(typeof player).toBe("object");
 });
 
