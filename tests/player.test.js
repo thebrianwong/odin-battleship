@@ -33,6 +33,9 @@ test("Player can place a Ship on their Gameboard", () => {
   ]);
   expect(spyGameboardPlaceShip).toHaveBeenCalled();
   expect(gameboard.getPlacedShips().length).toBe(1);
+  expect(gameboard.getCoordinates([0, 0])).toBeDefined();
+  expect(gameboard.getCoordinates([0, 1])).toBeDefined();
+  expect(gameboard.getCoordinates([0, 2])).toBeDefined();
 });
 
 test("Player 1 can hit Player 2's Ship", () => {
