@@ -31,9 +31,9 @@ test("hit a ship on the gameboard", () => {
     [3, 6],
     [3, 7],
   ]);
+  const spyShipHit = jest.spyOn(ship, "hit");
   gameboard.receiveAttack([3, 4]);
-  expect(gameboard.getCoordinates([3, 4])).toHaveBeenCalled();
-  expect(ship.hit()).toHaveBeenCalled(); /* keep for now but prob not */
+  expect(spyShipHit).toHaveBeenCalled();
   expect(ship.getShipHits()).toBe(1);
 });
 
