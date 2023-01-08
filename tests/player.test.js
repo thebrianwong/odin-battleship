@@ -47,8 +47,8 @@ test("Player 1 can hit Player 2's Ship", () => {
   player1.sendAttack(player2, [0, 0]);
   expect(spyPlayer2ReceiveAttack).toHaveBeenCalled();
   expect(spyPlayer2ShipHit).toHaveBeenCalled();
-  expect(player2Gameboard.getHitShots()).toContain([0, 0]);
-  expect(player2Gameboard.getMissedShots()).not.toContain([0, 0]);
+  expect(player2Gameboard.getReceivedHitShots()).toContain([0, 0]);
+  expect(player2Gameboard.getReceivedMissedShots()).not.toContain([0, 0]);
   expect(player2Ship.getShipHits()).toBe(1);
 });
 
@@ -64,8 +64,8 @@ test("Player 1 misses Player 2's Ship", () => {
   player1.sendAttack(player2, [0, 2]);
   expect(spyPlayer2ReceiveAttack).not.toHaveBeenCalled();
   expect(spyPlayer2ShipHit).not.toHaveBeenCalled();
-  expect(player2Gameboard.getMissedShots()).toContain([0, 0]);
-  expect(player2Gameboard.getHitShots()).not.toContain([0, 0]);
+  expect(player2Gameboard.getReceivedMissedShots()).toContain([0, 0]);
+  expect(player2Gameboard.getReceivedHitShots()).not.toContain([0, 0]);
   expect(player2Ship.getShipHits()).toBe(0);
 });
 
