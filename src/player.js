@@ -18,10 +18,20 @@ const Player = (playerType) => {
     const ship = Ship(shipLength);
     playerGameboard.placeShip(ship, coordinates);
   };
+  const sendAttack = (opposingPlayer, coordinates) => {
+    const opposingPlayerGameboard = opposingPlayer.getGameboard();
+    const attackResults = opposingPlayerGameboard.receiveAttack(coordinates);
+    if (attackResults === "hit") {
+      playerGameboard.addSentHitShot(coordinates);
+    } else if (attackResults === "miss") {
+      playerGameboard.addSentMissedShot(coordinates);
+    }
+  };
   return {
     isComputer,
     getGameboard,
     addShipToGameboard,
+    sendAttack,
   };
 };
 
