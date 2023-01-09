@@ -108,8 +108,10 @@ test("8) Player 1 sinks one of Player 2's Ships", () => {
   const player2Ship1 = player2.getGameboard().getPlacedShips()[0];
   const player2Ship2 = player2.getGameboard().getPlacedShips()[1];
   player1.sendAttack(player2, [0, 0]);
+  expect(player2Ship1.getShipHits()).toBe(1);
   expect(player2Ship1.isSunk()).toBeFalsy();
   player1.sendAttack(player2, [0, 1]);
+  expect(player2Ship1.getShipHits()).toBe(2);
   expect(player2Ship1.isSunk()).toBeTruthy();
   expect(player2.getGameboard().isAllShipsSunk()).toBeFalsy();
   expect(player2Ship2.getShipHits()).toBe(0);
@@ -132,12 +134,16 @@ test("9) Player 1 sinks all of Player 2's Ships", () => {
   ]);
   const player2Ship1 = player2.getGameboard().getPlacedShips()[0];
   const player2Ship2 = player2.getGameboard().getPlacedShips()[1];
+  const spyShip1Hit = jest.spyOn(player2Ship1, "hit");
+  const spyShip2Hit = jest.spyOn(player2Ship2, "hit");
   player1.sendAttack(player2, [0, 0]);
   player1.sendAttack(player2, [0, 1]);
+  expect(spyShip1Hit).toHaveBeenCalledTimes(2);
   expect(player2Ship1.isSunk()).toBeTruthy();
   expect(player2.getGameboard().isAllShipsSunk()).toBeFalsy();
   player1.sendAttack(player2, [0, 2]);
   player1.sendAttack(player2, [0, 3]);
+  expect(spyShip2Hit).toHaveBeenCalledTimes(2);
   expect(player2Ship2.isSunk()).toBeTruthy();
   expect(player2.getGameboard().isAllShipsSunk()).toBeTruthy();
 });
