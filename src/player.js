@@ -39,10 +39,10 @@ const Player = (playerType) => {
         }
         for (let i = 1; i < shipLength; i++) {
           if (
-            playerGameboard.getCoordinates(
-              [startingCoordinates[0]],
-              [startingCoordinates[1] - i]
-            ) !== undefined
+            playerGameboard.getCoordinates([
+              startingCoordinates[0],
+              startingCoordinates[1] - i,
+            ]) !== undefined
           ) {
             return false;
           }
@@ -55,10 +55,10 @@ const Player = (playerType) => {
         }
         for (let i = 1; i < shipLength; i++) {
           if (
-            playerGameboard.getCoordinates(
-              [startingCoordinates[0] + i],
-              [startingCoordinates[1]]
-            ) !== undefined
+            playerGameboard.getCoordinates([
+              startingCoordinates[0] + i,
+              startingCoordinates[1],
+            ]) !== undefined
           ) {
             return false;
           }
@@ -71,10 +71,10 @@ const Player = (playerType) => {
         }
         for (let i = 1; i < shipLength; i++) {
           if (
-            playerGameboard.getCoordinates(
-              [startingCoordinates[0]],
-              [startingCoordinates[1] + i]
-            ) !== undefined
+            playerGameboard.getCoordinates([
+              startingCoordinates[0],
+              startingCoordinates[1] + i,
+            ]) !== undefined
           ) {
             return false;
           }
@@ -87,10 +87,10 @@ const Player = (playerType) => {
         }
         for (let i = 1; i < shipLength; i++) {
           if (
-            playerGameboard.getCoordinates(
-              [startingCoordinates[0] - i],
-              [startingCoordinates[1]]
-            ) !== undefined
+            playerGameboard.getCoordinates([
+              startingCoordinates[0] - i,
+              startingCoordinates[1],
+            ]) !== undefined
           ) {
             return false;
           }
