@@ -34,41 +34,118 @@ const Player = (playerType) => {
     }
     return false;
   };
+  const checkIfValidEmptyCoordinates = (
+    startingCoordinates,
+    shipLength,
+    direction
+  ) => {
+    switch (direction) {
+      case "up":
+        if (startingCoordinates[1] - (shipLength - 1) < 0) {
+          return false;
+        }
+        for (let i = 1; i < shipLength; i++) {
+          if (
+            playerGameboard.getCoordinates(
+              [startingCoordinates[0]],
+              [startingCoordinates[1] - i]
+            ) !== undefined
+          ) {
+            return false;
+          }
+        }
+        return true;
+
+      case "right":
+        if (startingCoordinates[0] + (shipLength - 1) > 9) {
+          return false;
+        }
+        for (let i = 1; i < shipLength; i++) {
+          if (
+            playerGameboard.getCoordinates(
+              [startingCoordinates[0] + i],
+              [startingCoordinates[1]]
+            ) !== undefined
+          ) {
+            return false;
+          }
+        }
+        return true;
+
+      case "down":
+        if (startingCoordinates[1] + (shipLength - 1) > 9) {
+          return false;
+        }
+        for (let i = 1; i < shipLength; i++) {
+          if (
+            playerGameboard.getCoordinates(
+              [startingCoordinates[0]],
+              [startingCoordinates[1] + i]
+            ) !== undefined
+          ) {
+            return false;
+          }
+        }
+        return true;
+
+      case "left":
+        if (startingCoordinates[0] - (shipLength - 1) < 0) {
+          return false;
+        }
+        for (let i = 1; i < shipLength; i++) {
+          if (
+            playerGameboard.getCoordinates(
+              [startingCoordinates[0] - i],
+              [startingCoordinates[1]]
+            ) !== undefined
+          ) {
+            return false;
+          }
+        }
+        return true;
+
+      default:
+        break;
+    }
+  };
+
   const staysOnBoard = (startingCoordinates, shipLength, direction) => {
     switch (direction) {
       case "up":
         if (startingCoordinates[1] - (shipLength - 1) > 0) {
-          return true
-        } else {
-          return false
+          return true;
         }
+        return false;
+
       case "right":
         if (startingCoordinates[0] + (shipLength - 1) < 9) {
-          return true
-        } else {
-          return false
+          return true;
         }
+        return false;
+
       case "down":
         if (startingCoordinates[1] + (shipLength - 1) < 9) {
-          return true
-        } else {
-          return false
+          return true;
         }
+        return false;
+
       case "left":
         if (startingCoordinates[0] - (shipLength - 1) > 0) {
-          return true
-        } else {
-          return false
+          return true;
         }
+        return false;
+
       default:
         break;
     }
-  }
+  };
   const canOrientUp = (startingCoordinates, shipLength) => {
-    for (let i = 1; i < shipLength; i++) {
-      if (startingCoordinates[1] - i < 0 || typeof playerGameboard.getCoordinates([startingCoordinates[0]],[startingCoordinates[1] - i]) !== "object")
+    // for (let i = 1; i < shipLength; i++) {
+    //   if (startingCoordinates[1] - i < 0 || typeof playerGameboard.getCoordinates([startingCoordinates[0]],[startingCoordinates[1] - i]) !== "object")
+    // }
+    if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "up")) {
     }
-  }
+  };
   const generateStartingCoordinates = () => {
     const BOARDAXESLENGTH = 10;
     const rowCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
@@ -76,25 +153,73 @@ const Player = (playerType) => {
     return [rowCoordinate, columnCoordinate];
   };
   const generateNonStartingCoordinates = (startingCoordinates, shipLength) => {
-    const nonStartingCoordinates = []
-    const possibleOrientations = []
-    if (canOrientUp) {
-      possibleOrientations.push("up")
+    const possibleCoordinates = [];
+    if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "up")) {
+      const upCoordinates = [];
+      for (let i = 1; i < shipLength - 1; i++) {
+        upCoordinates.push([
+          startingCoordinates[0],
+          startingCoordinates[1] - i,
+        ]);
+      }
+      possibleCoordinates.push(upCoordinates);
     }
-  }
+    if (
+      checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "right")
+    ) {
+      const rightCoordinates = [];
+      for (let i = 1; i < shipLength - 1; i++) {
+        rightCoordinates.push([
+          startingCoordinates[0] + i,
+          startingCoordinates[1],
+        ]);
+      }
+      possibleCoordinates.push(rightCoordinates);
+    }
+    if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "down")) {
+      const downCoordinates = [];
+      for (let i = 1; i < shipLength - 1; i++) {
+        downCoordinates.push([
+          startingCoordinates[0],
+          startingCoordinates[1] + i,
+        ]);
+      }
+      possibleCoordinates.push(downCoordinates);
+    }
+    if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "left")) {
+      const leftCoordinates = [];
+      for (let i = 1; i < shipLength - 1; i++) {
+        leftCoordinates.push([
+          startingCoordinates[0] - i,
+          startingCoordinates[1],
+        ]);
+      }
+      possibleCoordinates.push(leftCoordinates);
+    }
+    if (possibleCoordinates.length === 0) {
+      return possibleCoordinates;
+    }
+    const randomIndex = Math.floor(Math.random() * possibleCoordinates.length);
+    return possibleCoordinates[randomIndex];
+  };
   const generateShipCoordinates = (shipLength) => {
     const BOARDAXESLENGTH = 10;
-    const listofCoordinates = [];
+    const listOfCoordinates = [];
     let startingCoordinates;
-    let nonStartingCoordinates
+    let nonStartingCoordinates;
     do {
       // const rowCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
       // const columnCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
       // randomStartingCoordinates = [rowCoordinate, columnCoordinate];
       startingCoordinates = generateStartingCoordinates();
-      nonStartingCoordinates = generateNonStartingCoordinates(startingCoordinates, shipLength)
-    } while (listofCoordinates.length < shipLength);
-    // listofCoordinates.push(startingCoordinates)
+      nonStartingCoordinates = generateNonStartingCoordinates(
+        startingCoordinates,
+        shipLength
+      );
+      listOfCoordinates.push(startingCoordinates);
+      listOfCoordinates.concat(nonStartingCoordinates);
+    } while (listOfCoordinates.length < shipLength);
+    return listOfCoordinates;
   };
   const initializeComputerGameboard = () => {
     if (!computerPlayer) {
