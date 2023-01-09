@@ -102,7 +102,7 @@ const Player = (playerType) => {
     }
   };
 
-  const staysOnBoard = (startingCoordinates, shipLength, direction) => {
+  /*   const staysOnBoard = (startingCoordinates, shipLength, direction) => {
     switch (direction) {
       case "up":
         if (startingCoordinates[1] - (shipLength - 1) > 0) {
@@ -131,7 +131,7 @@ const Player = (playerType) => {
       default:
         break;
     }
-  };
+  }; */
   const generateStartingCoordinates = () => {
     const BOARDAXESLENGTH = 10;
     const rowCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
