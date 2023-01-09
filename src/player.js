@@ -134,9 +134,12 @@ const Player = (playerType) => {
   }; */
   const generateStartingCoordinates = () => {
     const BOARDAXESLENGTH = 10;
-    const rowCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
-    const columnCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
-    return [rowCoordinate, columnCoordinate];
+    const startingCoordinates = [undefined, undefined];
+    do {
+      startingCoordinates[0] = Math.floor(Math.random() * BOARDAXESLENGTH);
+      startingCoordinates[1] = Math.floor(Math.random() * BOARDAXESLENGTH);
+    } while (playerGameboard.getCoordinates(startingCoordinates) !== undefined);
+    return startingCoordinates;
   };
   const generateNonStartingCoordinates = (startingCoordinates, shipLength) => {
     const possibleCoordinates = [];
