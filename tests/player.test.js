@@ -151,7 +151,7 @@ test("9) Player 1 sinks all of Player 2's Ships", () => {
 test("10) Computer Player can place their 5 Ships of respective lengths on the Gameboard", () => {
   const computerPlayer = Player("computer");
   const computerGameboard = computerPlayer.getGameboard();
-  const spyGameboardPlaceShip = spyOn(computerGameboard, "placeShip");
+  const spyGameboardPlaceShip = jest.spyOn(computerGameboard, "placeShip");
   computerPlayer.initializeComputerGameboard();
   expect(computerGameboard.getPlacedShips().length).toBe(5);
   expect(spyGameboardPlaceShip).toHaveBeenCalledTimes(5);
