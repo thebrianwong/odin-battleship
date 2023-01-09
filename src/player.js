@@ -27,13 +27,6 @@ const Player = (playerType) => {
       playerGameboard.addSentMissedShot(coordinates);
     }
   };
-  const orientHorizontally = () => {
-    const coinFlip = Math.floor(Math.random() * 2);
-    if (coinFlip === 0) {
-      return true;
-    }
-    return false;
-  };
   const checkIfValidEmptyCoordinates = (
     startingCoordinates,
     shipLength,
@@ -139,13 +132,6 @@ const Player = (playerType) => {
         break;
     }
   };
-  const canOrientUp = (startingCoordinates, shipLength) => {
-    // for (let i = 1; i < shipLength; i++) {
-    //   if (startingCoordinates[1] - i < 0 || typeof playerGameboard.getCoordinates([startingCoordinates[0]],[startingCoordinates[1] - i]) !== "object")
-    // }
-    if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "up")) {
-    }
-  };
   const generateStartingCoordinates = () => {
     const BOARDAXESLENGTH = 10;
     const rowCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
@@ -203,14 +189,10 @@ const Player = (playerType) => {
     return possibleCoordinates[randomIndex];
   };
   const generateShipCoordinates = (shipLength) => {
-    const BOARDAXESLENGTH = 10;
     const listOfCoordinates = [];
     let startingCoordinates;
     let nonStartingCoordinates;
     do {
-      // const rowCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
-      // const columnCoordinate = Math.floor(Math.random() * BOARDAXESLENGTH);
-      // randomStartingCoordinates = [rowCoordinate, columnCoordinate];
       startingCoordinates = generateStartingCoordinates();
       nonStartingCoordinates = generateNonStartingCoordinates(
         startingCoordinates,
