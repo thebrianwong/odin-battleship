@@ -32,10 +32,10 @@ const Gameboard = () => {
   const checkAllShipsSunk = () => {
     for (const ship of placedShips) {
       if (!ship.isSunk()) {
-        break;
+        return;
       }
-      allShipsSunk = true;
     }
+    allShipsSunk = true;
   };
   const receiveAttack = (coordinates) => {
     const entityAtCoordinates = getCoordinates(coordinates);
