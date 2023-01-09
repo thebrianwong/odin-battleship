@@ -221,6 +221,7 @@ const Player = (playerType) => {
     getGameboard,
     addShipToGameboard,
     sendAttack,
+    initializeComputerGameboard,
   };
 };
 
