@@ -145,7 +145,7 @@ const Player = (playerType) => {
     const possibleCoordinates = [];
     if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "up")) {
       const upCoordinates = [];
-      for (let i = 1; i < shipLength - 1; i++) {
+      for (let i = 1; i < shipLength; i++) {
         upCoordinates.push([
           startingCoordinates[0] - i,
           startingCoordinates[1],
@@ -157,7 +157,7 @@ const Player = (playerType) => {
       checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "right")
     ) {
       const rightCoordinates = [];
-      for (let i = 1; i < shipLength - 1; i++) {
+      for (let i = 1; i < shipLength; i++) {
         rightCoordinates.push([
           startingCoordinates[0],
           startingCoordinates[1] + i,
@@ -167,7 +167,7 @@ const Player = (playerType) => {
     }
     if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "down")) {
       const downCoordinates = [];
-      for (let i = 1; i < shipLength - 1; i++) {
+      for (let i = 1; i < shipLength; i++) {
         downCoordinates.push([
           startingCoordinates[0] + i,
           startingCoordinates[1],
@@ -177,7 +177,7 @@ const Player = (playerType) => {
     }
     if (checkIfValidEmptyCoordinates(startingCoordinates, shipLength, "left")) {
       const leftCoordinates = [];
-      for (let i = 1; i < shipLength - 1; i++) {
+      for (let i = 1; i < shipLength; i++) {
         leftCoordinates.push([
           startingCoordinates[0],
           startingCoordinates[1] - i,
