@@ -202,7 +202,8 @@ const Player = (playerType) => {
         shipLength
       );
       listOfCoordinates.push(startingCoordinates);
-      listOfCoordinates.concat(nonStartingCoordinates);
+      listOfCoordinates = listOfCoordinates.concat(nonStartingCoordinates);
+      console.log(listOfCoordinates);
     } while (listOfCoordinates.length < shipLength);
     return listOfCoordinates;
   };
