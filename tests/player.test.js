@@ -181,7 +181,10 @@ test("12) Computer Player is unable to send attacks to the same coordinates twic
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
-  humanPlayer.addShipToGameboard(2, [[[0, 0]], [[0, 1]]]);
+  humanPlayer.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
   const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
