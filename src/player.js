@@ -192,12 +192,11 @@ const Player = (playerType) => {
     return possibleCoordinates[randomIndex];
   };
   const generateShipCoordinates = (shipLength) => {
-    const listOfCoordinates = [];
-    let startingCoordinates;
-    let nonStartingCoordinates;
+    let listOfCoordinates = [];
     do {
-      startingCoordinates = generateStartingCoordinates();
-      nonStartingCoordinates = generateNonStartingCoordinates(
+      listOfCoordinates = [];
+      const startingCoordinates = generateStartingCoordinates();
+      const nonStartingCoordinates = generateNonStartingCoordinates(
         startingCoordinates,
         shipLength
       );
