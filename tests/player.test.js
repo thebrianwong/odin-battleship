@@ -167,7 +167,7 @@ test("11) Computer Player can send attacks", () => {
   ]);
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
-  const spyHumanReceiveAttack = spyOn(humanGameboard, "receiveAttack");
+  const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
   computerPlayer.sendComputerAttack(humanPlayer);
   expect(spyHumanReceiveAttack).toHaveBeenCalled();
   expect(
@@ -184,7 +184,7 @@ test("12) Computer Player is unable to send attacks to the same coordinates twic
   humanPlayer.addShipToGameboard(2, [[[0, 0]], [[0, 1]]]);
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
-  const spyHumanReceiveAttack = spyOn(humanGameboard, "receiveAttack");
+  const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
   computerPlayer.sendComputerAttack(humanPlayer);
   expect(spyHumanReceiveAttack).toHaveBeenCalled();
   expect(
