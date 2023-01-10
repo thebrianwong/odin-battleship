@@ -34,29 +34,13 @@ const Player = (playerType) => {
   ) => {
     switch (direction) {
       case "up":
-        if (startingCoordinates[1] - (shipLength - 1) < 0) {
+        if (startingCoordinates[0] - (shipLength - 1) < 0) {
           return false;
         }
         for (let i = 1; i < shipLength; i++) {
           if (
             playerGameboard.getCoordinates([
-              startingCoordinates[0],
-              startingCoordinates[1] - i,
-            ]) !== undefined
-          ) {
-            return false;
-          }
-        }
-        return true;
-
-      case "right":
-        if (startingCoordinates[0] + (shipLength - 1) > 9) {
-          return false;
-        }
-        for (let i = 1; i < shipLength; i++) {
-          if (
-            playerGameboard.getCoordinates([
-              startingCoordinates[0] + i,
+              startingCoordinates[0] - i,
               startingCoordinates[1],
             ]) !== undefined
           ) {
@@ -65,7 +49,7 @@ const Player = (playerType) => {
         }
         return true;
 
-      case "down":
+      case "right":
         if (startingCoordinates[1] + (shipLength - 1) > 9) {
           return false;
         }
@@ -81,15 +65,31 @@ const Player = (playerType) => {
         }
         return true;
 
-      case "left":
-        if (startingCoordinates[0] - (shipLength - 1) < 0) {
+      case "down":
+        if (startingCoordinates[0] + (shipLength - 1) > 9) {
           return false;
         }
         for (let i = 1; i < shipLength; i++) {
           if (
             playerGameboard.getCoordinates([
-              startingCoordinates[0] - i,
+              startingCoordinates[0] + i,
               startingCoordinates[1],
+            ]) !== undefined
+          ) {
+            return false;
+          }
+        }
+        return true;
+
+      case "left":
+        if (startingCoordinates[1] - (shipLength - 1) < 0) {
+          return false;
+        }
+        for (let i = 1; i < shipLength; i++) {
+          if (
+            playerGameboard.getCoordinates([
+              startingCoordinates[0],
+              startingCoordinates[1] - i,
             ]) !== undefined
           ) {
             return false;
@@ -147,8 +147,8 @@ const Player = (playerType) => {
       const upCoordinates = [];
       for (let i = 1; i < shipLength - 1; i++) {
         upCoordinates.push([
-          startingCoordinates[0],
-          startingCoordinates[1] - i,
+          startingCoordinates[0] - i,
+          startingCoordinates[1],
         ]);
       }
       possibleCoordinates.push(upCoordinates);
@@ -159,8 +159,8 @@ const Player = (playerType) => {
       const rightCoordinates = [];
       for (let i = 1; i < shipLength - 1; i++) {
         rightCoordinates.push([
-          startingCoordinates[0] + i,
-          startingCoordinates[1],
+          startingCoordinates[0],
+          startingCoordinates[1] + i,
         ]);
       }
       possibleCoordinates.push(rightCoordinates);
@@ -169,8 +169,8 @@ const Player = (playerType) => {
       const downCoordinates = [];
       for (let i = 1; i < shipLength - 1; i++) {
         downCoordinates.push([
-          startingCoordinates[0],
-          startingCoordinates[1] + i,
+          startingCoordinates[0] + i,
+          startingCoordinates[1],
         ]);
       }
       possibleCoordinates.push(downCoordinates);
@@ -179,8 +179,8 @@ const Player = (playerType) => {
       const leftCoordinates = [];
       for (let i = 1; i < shipLength - 1; i++) {
         leftCoordinates.push([
-          startingCoordinates[0] - i,
-          startingCoordinates[1],
+          startingCoordinates[0],
+          startingCoordinates[1] - i,
         ]);
       }
       possibleCoordinates.push(leftCoordinates);
