@@ -171,7 +171,9 @@ test("11) Computer Player can send attacks that hit", () => {
   jest.spyOn(Math, "random").mockReturnValue(0.1);
   computerPlayer.sendComputerAttack(humanPlayer);
   expect(spyHumanReceiveAttack).toHaveBeenCalled();
+  expect(computerGameboard.getSentMissedShots().length).toBe(0);
   expect(computerGameboard.getSentHitShots().length).toBe(1);
+  expect(humanGameboard.getReceivedMissedShots().length).toBe(0);
   expect(humanGameboard.getReceivedHitShots().length).toBe(1);
   expect(humanGameboard.getPlacedShips()[0].getShipHits()).toBe(1);
   jest.spyOn(global.Math, "random").mockRestore();
