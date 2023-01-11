@@ -157,23 +157,24 @@ test("10) Computer Player can place their 5 Ships of respective lengths on the G
   expect(spyGameboardPlaceShip).toHaveBeenCalledTimes(5);
 });
 
-test("11) Computer Player can send attacks", () => {
+test("11) Computer Player can send attacks that hit", () => {
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
   humanPlayer.addShipToGameboard(2, [
-    [0, 0],
-    [0, 1],
+    [1, 0],
+    [1, 1],
   ]);
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
   const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
+  jest.spyOn(Math, "random").mockReturnValue(0.1);
   computerPlayer.sendComputerAttack(humanPlayer);
   expect(spyHumanReceiveAttack).toHaveBeenCalled();
-  expect(
-    computerGameboard.getSentMissedShots().length ||
-      computerGameboard.getSentHitShots().length
-  ).toBe(1);
+  expect(computerGameboard.getSentHitShots().length).toBe(1);
+  expect(humanGameboard.getReceivedHitShots().length).toBe(1);
+  expect(humanGameboard.getPlacedShips()[0].getShipHits()).toBe(1);
+  jest.spyOn(global.Math, "random").mockRestore();
 });
 
 test("12) Computer Player is unable to send attacks to the same coordinates twice", () => {
