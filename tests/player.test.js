@@ -179,7 +179,29 @@ test("11) Computer Player can send attacks that hit", () => {
   jest.spyOn(global.Math, "random").mockRestore();
 });
 
-test("12) Computer Player is unable to send attacks to the same coordinates twice", () => {
+test("12) Computer Player can send attacks that miss", () => {
+  const computerPlayer = Player("computer");
+  const humanPlayer = Player("human");
+  computerPlayer.initializeComputerGameboard();
+  humanPlayer.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  const computerGameboard = computerPlayer.getGameboard();
+  const humanGameboard = humanPlayer.getGameboard();
+  const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
+  jest.spyOn(Math, "random").mockReturnValue(0.1);
+  computerPlayer.sendComputerAttack(humanPlayer);
+  expect(spyHumanReceiveAttack).toHaveBeenCalled();
+  expect(computerGameboard.getSentMissedShots().length).toBe(1);
+  expect(computerGameboard.getSentHitShots().length).toBe(0);
+  expect(humanGameboard.getReceivedMissedShots().length).toBe(1);
+  expect(humanGameboard.getReceivedHitShots().length).toBe(0);
+  expect(humanGameboard.getPlacedShips()[0].getShipHits()).toBe(0);
+  jest.spyOn(global.Math, "random").mockRestore();
+});
+
+test("13) Computer Player is unable to send attacks to the same coordinates twice", () => {
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
