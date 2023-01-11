@@ -201,30 +201,34 @@ test("12) Computer Player can send attacks that miss", () => {
   jest.spyOn(global.Math, "random").mockRestore();
 });
 
-test("13) Computer Player is unable to send attacks to the same coordinates twice", () => {
+test("13) Computer Player is unable to send attacks to coordinates previously hit", () => {
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
   humanPlayer.addShipToGameboard(2, [
-    [0, 0],
-    [0, 1],
+    [5, 4],
+    [5, 5],
   ]);
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
   const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
+  const spyHumanGetCoordinates = jest.spyOn(humanGameboard, "getCoordinates");
   jest.spyOn(Math, "random").mockReturnValue(0.5);
   computerPlayer.sendComputerAttack(humanPlayer);
   expect(spyHumanReceiveAttack).toHaveBeenCalled();
-  expect(
-    computerGameboard.getSentMissedShots().length ||
-      computerGameboard.getSentHitShots().length
-  ).toBe(1);
+  jest.spyOn(global.Math, "random").mockRestore();
+  expect(computerGameboard.getSentMissedShots().length).toBe(0);
+  expect(computerGameboard.getSentHitShots().length).toBe(1);
+  jest
+    .spyOn(Math, "random")
+    .mockReturnValue(0)
+    .mockReturnValueOnce(0.5)
+    .mockReturnValueOnce(0.5);
   computerPlayer.sendComputerAttack(humanPlayer);
-  expect(spyHumanReceiveAttack).not.toHaveBeenCalledTimes(2);
-  expect(
-    computerGameboard.getSentMissedShots().length ||
-      computerGameboard.getSentHitShots().length
-  ).toBe(1);
-  expect(spyHumanReceiveAttack).toHaveBeenCalledTimes(1);
+  expect(spyHumanGetCoordinates).toHaveBeenCalledTimes(4);
+  expect(spyHumanReceiveAttack).toHaveBeenCalledTimes(2);
+  expect(computerGameboard.getSentMissedShots().length).toBe(2);
+  expect(computerGameboard.getSentHitShots().length).toBe(1);
+  expect(humanGameboard.getPlacedShips()[0].getShipHits()).toBe(1);
   jest.spyOn(global.Math, "random").mockRestore();
 });
