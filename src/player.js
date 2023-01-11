@@ -132,12 +132,15 @@ const Player = (playerType) => {
         break;
     }
   }; */
-  const generateStartingCoordinates = () => {
+  const generateRandomCoordinate = () => {
     const BOARDAXESLENGTH = 10;
+    return Math.floor(Math.random() * BOARDAXESLENGTH);
+  };
+  const generateStartingCoordinates = () => {
     const startingCoordinates = [undefined, undefined];
     do {
-      startingCoordinates[0] = Math.floor(Math.random() * BOARDAXESLENGTH);
-      startingCoordinates[1] = Math.floor(Math.random() * BOARDAXESLENGTH);
+      startingCoordinates[0] = generateRandomCoordinate();
+      startingCoordinates[1] = generateRandomCoordinate();
     } while (playerGameboard.getCoordinates(startingCoordinates) !== undefined);
     return startingCoordinates;
   };
