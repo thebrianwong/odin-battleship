@@ -134,8 +134,6 @@ const Player = (playerType) => {
   }; */
   const generateRandomCoordinate = () => {
     const BOARDAXESLENGTH = 10;
-    // console.log(Math.random());
-    // console.log(Math.floor(Math.random() * BOARDAXESLENGTH));
     return Math.floor(Math.random() * BOARDAXESLENGTH);
   };
   const generateStartingCoordinates = () => {
@@ -207,7 +205,6 @@ const Player = (playerType) => {
       );
       listOfCoordinates.push(startingCoordinates);
       listOfCoordinates = listOfCoordinates.concat(nonStartingCoordinates);
-      // console.log(listOfCoordinates);
     } while (listOfCoordinates.length < shipLength);
     return listOfCoordinates;
   };
@@ -227,11 +224,6 @@ const Player = (playerType) => {
   ) =>
     opposingPlayerReceivedShots.some(
       (receivedShot) =>
-        // console.log("receivedShot, test func", receivedShot, attackCoordinates);
-        // console.log(
-        //   receivedShot[0] === attackCoordinates[0] &&
-        //     receivedShot[1] === attackCoordinates[1]
-        // );
         receivedShot[0] === attackCoordinates[0] &&
         receivedShot[1] === attackCoordinates[1]
     );
@@ -242,26 +234,10 @@ const Player = (playerType) => {
     const receivedHitShots = opposingPlayer
       .getGameboard()
       .getReceivedHitShots();
-    console.log(
-      "receivedMissedShots, receivedHitShots",
-      receivedMissedShots,
-      receivedHitShots
-    );
     const attackCoordinates = [undefined, undefined];
     do {
-      console.log("HAPPENS");
       attackCoordinates[0] = generateRandomCoordinate();
       attackCoordinates[1] = generateRandomCoordinate();
-      console.log(
-        "checkIfPreviouslyAttacked(receivedMissedShots, attackCoordinates)",
-        checkIfPreviouslyAttacked(receivedMissedShots, attackCoordinates)
-      );
-      if (
-        checkIfPreviouslyAttacked(receivedMissedShots, attackCoordinates) ||
-        checkIfPreviouslyAttacked(receivedHitShots, attackCoordinates)
-      ) {
-        console.log("wfwfwffwwfwFW", attackCoordinates);
-      }
     } while (
       checkIfPreviouslyAttacked(receivedMissedShots, attackCoordinates) ||
       checkIfPreviouslyAttacked(receivedHitShots, attackCoordinates)
@@ -274,7 +250,6 @@ const Player = (playerType) => {
     }
     const attackCoordinates = generateAttackCoordinates(humanPlayer);
     sendAttack(humanPlayer, attackCoordinates);
-    console.log(attackCoordinates);
   };
   return {
     isComputer,
