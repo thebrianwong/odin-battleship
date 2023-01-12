@@ -201,7 +201,7 @@ test("12) Computer Player can send attacks that miss", () => {
   jest.spyOn(global.Math, "random").mockRestore();
 });
 
-test.only("13) Computer Player is unable to send attacks to coordinates previously hit", () => {
+test("13) Computer Player is unable to send attacks to coordinates previously hit", () => {
   const computerPlayer = Player("computer");
   const humanPlayer = Player("human");
   computerPlayer.initializeComputerGameboard();
@@ -212,7 +212,14 @@ test.only("13) Computer Player is unable to send attacks to coordinates previous
   const computerGameboard = computerPlayer.getGameboard();
   const humanGameboard = humanPlayer.getGameboard();
   const spyHumanReceiveAttack = jest.spyOn(humanGameboard, "receiveAttack");
-  const spyHumanGetCoordinates = jest.spyOn(humanGameboard, "getCoordinates");
+  const spyHumanGetReceivedMissedShots = jest.spyOn(
+    humanGameboard,
+    "getReceivedMissedShots"
+  );
+  const spyHumanGetReceivedHitShots = jest.spyOn(
+    humanGameboard,
+    "getReceivedHitShots"
+  );
   jest.spyOn(Math, "random").mockReturnValue(0.5);
   computerPlayer.sendComputerAttack(humanPlayer);
   expect(spyHumanReceiveAttack).toHaveBeenCalled();
@@ -227,7 +234,8 @@ test.only("13) Computer Player is unable to send attacks to coordinates previous
     .mockReturnValueOnce(0.5)
     .mockReturnValueOnce(0.5);
   computerPlayer.sendComputerAttack(humanPlayer);
-  // expect(spyHumanGetCoordinates).toHaveBeenCalledTimes(4);
+  expect(spyHumanGetReceivedMissedShots).toHaveBeenCalledTimes(2);
+  expect(spyHumanGetReceivedHitShots).toHaveBeenCalledTimes(2);
   expect(spyHumanReceiveAttack).toHaveBeenCalledTimes(2);
   expect(computerGameboard.getSentMissedShots().length).toBe(1);
   expect(computerGameboard.getSentHitShots().length).toBe(1);
