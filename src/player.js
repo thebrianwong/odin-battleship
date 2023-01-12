@@ -224,7 +224,7 @@ const Player = (playerType) => {
   const checkIfPreviouslyAttacked = (
     opposingPlayerReceivedShots,
     attackCoordinates
-  ) => {
+  ) =>
     opposingPlayerReceivedShots.some(
       (receivedShot) =>
         // console.log("receivedShot, test func", receivedShot, attackCoordinates);
@@ -235,7 +235,6 @@ const Player = (playerType) => {
         receivedShot[0] === attackCoordinates[0] &&
         receivedShot[1] === attackCoordinates[1]
     );
-  };
   const generateAttackCoordinates = (opposingPlayer) => {
     const receivedMissedShots = opposingPlayer
       .getGameboard()
