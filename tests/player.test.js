@@ -1,6 +1,6 @@
-const Ship = require("../src/ship");
-const Gameboard = require("../src/gameboard");
-const Player = require("../src/player");
+import { Ship } from "../src/ship";
+import { Gameboard } from "../src/gameboard";
+import { Player } from "../src/player";
 
 test("1) Create a Player", () => {
   const player = Player("human");

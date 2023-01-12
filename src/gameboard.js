@@ -69,4 +69,4 @@ const Gameboard = () => {
   };
 };
 
-module.exports = Gameboard;
+export { Gameboard };

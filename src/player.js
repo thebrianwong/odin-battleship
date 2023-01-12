@@ -1,5 +1,5 @@
-const Ship = require("./ship");
-const Gameboard = require("./gameboard");
+import { Ship } from "./ship";
+import { Gameboard } from "./gameboard";
 
 const Player = (playerType) => {
   const determinePlayerType = () => {
@@ -261,4 +261,4 @@ const Player = (playerType) => {
   };
 };
 
-module.exports = Player;
+export { Player };

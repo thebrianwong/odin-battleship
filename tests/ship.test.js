@@ -1,4 +1,4 @@
-const Ship = require("../src/ship");
+import { Ship } from "../src/ship";
 
 test("1) Create a 4 length Ship with default 0 hits and not sunken properties", () => {
   const ship = Ship(4);

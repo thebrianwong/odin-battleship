@@ -26,4 +26,4 @@ const Ship = (givenLength) => {
   };
 };
 
-module.exports = Ship;
+export { Ship };
