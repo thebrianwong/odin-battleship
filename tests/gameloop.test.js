@@ -22,7 +22,16 @@ test("2) Expect Players to have Gameboards upon being initialized", () => {
   expect(computerPlayer.getGameboard()).toBeDefined();
 });
 
-test("3) Human Players can place Ships on their Gameboards", () => {
+test("3) Expect Players to hold references to their opponents", () => {
+  GameLoop.createGame();
+  const players = GameLoop.getPlayers();
+  const humanPlayer = players[0];
+  const computerPlayer = players[1];
+  expect(humanPlayer.getOpposingPlayer()).toStrictEqual(computerPlayer);
+  expect(computerPlayer.getOpposingPlayer()).toStrictEqual(humanPlayer);
+});
+
+test("4) Human Players can place Ships on their Gameboards", () => {
   GameLoop.createGame();
   const humanPlayer = GameLoop.getPlayers()[0];
   humanPlayer.addShipToGameboard(5, [
@@ -55,13 +64,13 @@ test("3) Human Players can place Ships on their Gameboards", () => {
   expect(humanPlayer.getGameboard().getPlacedShips().length).toBe(5);
 });
 
-test("4) Computer Players have their Ships randomly placed on their Gameboards", () => {
+test("5) Computer Players have their Ships randomly placed on their Gameboards", () => {
   GameLoop.createGame();
   const computerPlayer = GameLoop.getPlayers()[0];
   expect(computerPlayer.getGameboard().getPlacedShips().length).toBe(5);
 });
 
-test("5) The Computer Player attacks after the Human Player attacks", () => {
+test("6) The Computer Player attacks after the Human Player attacks", () => {
   GameLoop.createGame();
   const humanPlayer = GameLoop.getPlayers()[0];
   const spyHumanSendAttack = jest.spyOn(humanPlayer, "sendAttack");
