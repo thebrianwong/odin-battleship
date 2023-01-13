@@ -70,7 +70,7 @@ test("4) Human Players can place Ships on their Gameboards", () => {
 
 test("5) Computer Players have their Ships randomly placed on their Gameboards", () => {
   GameLoop.createGame();
-  const computerPlayer = GameLoop.getPlayers()[0];
+  const computerPlayer = GameLoop.getPlayers()[1];
   expect(computerPlayer.getGameboard().getPlacedShips().length).toBe(5);
 });
 
@@ -91,3 +91,5 @@ test("6) The Computer Player attacks after the Human Player attacks", () => {
   expect(spyComputerSendComputerAttack).toHaveBeenCalledTimes(1);
   expect(spyComputerReceiveAttack).toHaveBeenCalledTimes(1);
 });
+
+// write test for all ship sunk and game ends
