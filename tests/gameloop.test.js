@@ -71,13 +71,10 @@ test("5) The Computer Player attacks after the Human Player attacks", () => {
     computerPlayer,
     "sendComputerAttack"
   );
-  const spyComputerReceiveComputerAttack = jest.spyOn(
-    computerPlayer,
-    "receiveComputerAttack"
-  );
+  const spyComputerReceiveAttack = jest.spyOn(computerPlayer, "receiveAttack");
   humanPlayer.sendAttack(computerPlayer, [0, 0]);
   expect(spyHumanSendAttack).toHaveBeenCalledTimes(1);
   expect(spyHumanReceiveAttack).toHaveBeenCalled(1);
   expect(spyComputerSendComputerAttack).toHaveBeenCalledTimes(1);
-  expect(spyComputerReceiveComputerAttack).toHaveBeenCalledTimes(1);
+  expect(spyComputerReceiveAttack).toHaveBeenCalledTimes(1);
 });
