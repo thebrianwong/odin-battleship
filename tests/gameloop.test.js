@@ -61,21 +61,23 @@ test("4) Computer Players have their Ships randomly placed on their Gameboards",
   expect(computerPlayer.getGameboard().getPlacedShips().length).toBe(5);
 });
 
-test("5) The Game Loop keeps track of the current Player", () => {
-  GameLoop.createGame();
-  expect(GameLoop.getCurrentPlayer()).toBeDefined();
-});
-
-test("6) Expect the game to start with the Human Player as the current Player", () => {
+test("5) The Computer Player attacks after the Human Player attacks", () => {
   GameLoop.createGame();
   const humanPlayer = GameLoop.getPlayers()[0];
-  expect(GameLoop.getCurrentPlayer()).toStrictEqual(humanPlayer);
-});
-
-test("7) The current Player switches to the Computer Player after the Human Player attacks", () => {
-  GameLoop.createGame();
-  const humanPlayer = GameLoop.getPlayers()[0];
+  const spyHumanSendAttack = jest.spyOn(humanPlayer, "sendAttack");
+  const spyHumanReceiveAttack = jest.spyOn(humanPlayer, "receiveAttack");
   const computerPlayer = GameLoop.getPlayers()[1];
-  GameLoop.currentPlayerAttacks([0, 0]);
-  // add spyOn sendAttack, receivedAttack, shots array
+  const spyComputerSendComputerAttack = jest.spyOn(
+    computerPlayer,
+    "sendComputerAttack"
+  );
+  const spyComputerReceiveComputerAttack = jest.spyOn(
+    computerPlayer,
+    "receiveComputerAttack"
+  );
+  humanPlayer.sendAttack(computerPlayer, [0, 0]);
+  expect(spyHumanSendAttack).toHaveBeenCalledTimes(1);
+  expect(spyHumanReceiveAttack).toHaveBeenCalled(1);
+  expect(spyComputerSendComputerAttack).toHaveBeenCalledTimes(1);
+  expect(spyComputerReceiveComputerAttack).toHaveBeenCalledTimes(1);
 });
