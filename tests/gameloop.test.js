@@ -3,6 +3,10 @@ import { Gameboard } from "../src/gameboard";
 import { Player } from "../src/player";
 import { GameLoop } from "../src/gameloop";
 
+afterEach(() => {
+  GameLoop.resetGame();
+});
+
 test("1) Create a new game with a human Player and a computer Player", () => {
   GameLoop.createGame();
   const players = GameLoop.getPlayers();
