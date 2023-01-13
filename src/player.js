@@ -23,7 +23,7 @@ const Player = (playerType) => {
     const ship = Ship(shipLength);
     playerGameboard.placeShip(ship, coordinates);
   };
-  const sendAttack = (opposingPlayer, coordinates) => {
+  const sendAttack = (coordinates) => {
     const opposingPlayerGameboard = opposingPlayer.getGameboard();
     const attackResults = opposingPlayer.receiveAttack(coordinates);
     if (attackResults === "hit") {
@@ -232,7 +232,7 @@ const Player = (playerType) => {
         receivedShot[0] === attackCoordinates[0] &&
         receivedShot[1] === attackCoordinates[1]
     );
-  const generateAttackCoordinates = (opposingPlayer) => {
+  const generateAttackCoordinates = () => {
     const receivedMissedShots = opposingPlayer
       .getGameboard()
       .getReceivedMissedShots();
@@ -249,12 +249,12 @@ const Player = (playerType) => {
     );
     return attackCoordinates;
   };
-  const sendComputerAttack = (humanPlayer) => {
+  const sendComputerAttack = () => {
     if (!computerPlayer) {
       return;
     }
-    const attackCoordinates = generateAttackCoordinates(humanPlayer);
-    sendAttack(humanPlayer, attackCoordinates);
+    const attackCoordinates = generateAttackCoordinates();
+    sendAttack(attackCoordinates);
   };
   const receiveAttack = (coordinates) => {
     const attackResults = playerGameboard.receiveAttack(coordinates);
