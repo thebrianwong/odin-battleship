@@ -12,6 +12,7 @@ const GameLoop = (() => {
     players.push(computerPlayer);
     humanPlayer.setOpposingPlayer(computerPlayer);
     computerPlayer.setOpposingPlayer(humanPlayer);
+    computerPlayer.initializeComputerGameboard();
   };
   const getPlayers = () => players;
   const resetGame = () => {
