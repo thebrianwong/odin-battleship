@@ -31,6 +31,9 @@ const Player = (playerType) => {
     } else if (attackResults === "miss") {
       playerGameboard.addSentMissedShot(coordinates);
     }
+    if (opposingPlayer.isComputer()) {
+      opposingPlayer.sendComputerAttack();
+    }
   };
   const checkIfValidEmptyCoordinates = (
     startingCoordinates,
