@@ -10,6 +10,8 @@ const GameLoop = (() => {
     players.push(humanPlayer);
     const computerPlayer = Player("computer");
     players.push(computerPlayer);
+    humanPlayer.setOpposingPlayer(computerPlayer);
+    computerPlayer.setOpposingPlayer(humanPlayer);
   };
   const getPlayers = () => players;
   return {

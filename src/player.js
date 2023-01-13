@@ -12,8 +12,13 @@ const Player = (playerType) => {
   };
   const computerPlayer = determinePlayerType();
   const playerGameboard = Gameboard();
+  let opposingPlayer;
   const isComputer = () => computerPlayer;
   const getGameboard = () => playerGameboard;
+  const getOpposingPlayer = () => opposingPlayer;
+  const setOpposingPlayer = (player) => {
+    opposingPlayer = player;
+  };
   const addShipToGameboard = (shipLength, coordinates) => {
     const ship = Ship(shipLength);
     playerGameboard.placeShip(ship, coordinates);
@@ -258,6 +263,8 @@ const Player = (playerType) => {
   return {
     isComputer,
     getGameboard,
+    getOpposingPlayer,
+    setOpposingPlayer,
     addShipToGameboard,
     sendAttack,
     initializeComputerGameboard,
