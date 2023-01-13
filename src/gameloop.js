@@ -4,7 +4,7 @@ import { Player } from "./player";
 
 const GameLoop = (() => {
   const players = [];
-  const inProgress = true;
+  let inProgress = true;
   const createGame = () => {
     const humanPlayer = Player("human");
     players.push(humanPlayer);
@@ -14,9 +14,14 @@ const GameLoop = (() => {
     computerPlayer.setOpposingPlayer(humanPlayer);
   };
   const getPlayers = () => players;
+  const resetGame = () => {
+    players.length = 0;
+    inProgress = true;
+  };
   return {
     createGame,
     getPlayers,
+    resetGame,
   };
 })();
 
