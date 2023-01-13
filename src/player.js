@@ -20,7 +20,7 @@ const Player = (playerType) => {
   };
   const sendAttack = (opposingPlayer, coordinates) => {
     const opposingPlayerGameboard = opposingPlayer.getGameboard();
-    const attackResults = opposingPlayerGameboard.receiveAttack(coordinates);
+    const attackResults = opposingPlayer.receiveAttack(coordinates);
     if (attackResults === "hit") {
       playerGameboard.addSentHitShot(coordinates);
     } else if (attackResults === "miss") {
@@ -251,6 +251,10 @@ const Player = (playerType) => {
     const attackCoordinates = generateAttackCoordinates(humanPlayer);
     sendAttack(humanPlayer, attackCoordinates);
   };
+  const receiveAttack = (coordinates) => {
+    const attackResults = playerGameboard.receiveAttack(coordinates);
+    return attackResults;
+  };
   return {
     isComputer,
     getGameboard,
@@ -258,6 +262,7 @@ const Player = (playerType) => {
     sendAttack,
     initializeComputerGameboard,
     sendComputerAttack,
+    receiveAttack,
   };
 };
 
