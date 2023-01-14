@@ -30,12 +30,9 @@ const Gameboard = () => {
     placedShips.push(ship);
   };
   const checkAllShipsSunk = () => {
-    for (const ship of placedShips) {
-      if (!ship.isSunk()) {
-        return;
-      }
+    if (placedShips.every((ship) => ship.isSunk())) {
+      allShipsSunk = true;
     }
-    allShipsSunk = true;
   };
   const receiveAttack = (coordinates) => {
     const entityAtCoordinates = getCoordinates(coordinates);
