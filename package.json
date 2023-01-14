@@ -1,10 +1,32 @@
 {
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
-    "babel-jest": "^29.3.1"
-  }
+    "babel-jest": "^29.3.1",
+    "css-loader": "^6.7.3",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "name": "odin-battleship",
+  "version": "1.0.0",
+  "main": "babel.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thebrianwong/odin-battleship.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thebrianwong/odin-battleship/issues"
+  },
+  "homepage": "https://github.com/thebrianwong/odin-battleship#readme",
+  "description": ""
 }
