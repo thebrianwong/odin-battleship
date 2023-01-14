@@ -30,7 +30,7 @@ const Player = (playerType) => {
     if (attackResults === "hit") {
       playerGameboard.addSentHitShot(coordinates);
       if (opposingPlayerGameboard.isAllShipsSunk()) {
-        GameLoop.endGame();
+        GameLoop.endGame(opposingPlayer);
         return;
       }
     } else if (attackResults === "miss") {
