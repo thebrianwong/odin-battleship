@@ -19,10 +19,16 @@ const GameLoop = (() => {
     players.length = 0;
     inProgress = true;
   };
+  const endGame = () => {
+    inProgress = false;
+  };
+  const isInProgress = () => inProgress;
   return {
     createGame,
     getPlayers,
     resetGame,
+    endGame,
+    isInProgress,
   };
 })();
 
