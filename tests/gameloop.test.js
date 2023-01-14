@@ -108,5 +108,5 @@ test("7) The game ends after a Player loses all their Ships", () => {
   humanPlayer.sendAttack([6, 6]);
   humanPlayer.sendAttack([6, 7]);
   expect(humanPlayer.getGameboard().isAllShipsSunk()).toBeTruthy();
-  // game loop need to know somehow and set inProgress to false
+  expect(GameLoop.isInProgress()).toBeFalsy();
 });
