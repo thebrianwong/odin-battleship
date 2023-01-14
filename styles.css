@@ -1,0 +1,22 @@
+* {
+  border: solid 1px red;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+  margin: 5vh auto;
+}
+
+.gameboard {
+  width: 60vw;
+  height: 55vh;
+}
