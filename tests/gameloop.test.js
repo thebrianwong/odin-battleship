@@ -129,3 +129,27 @@ test("8) The game know which Player won after the game ends", () => {
   humanPlayer.sendAttack([6, 7]);
   expect(GameLoop.getWinner()).toStrictEqual(computerPlayer);
 });
+
+test("9) The game can reset itself after it ends and the player wants to play again", () => {
+  GameLoop.createGame();
+  const humanPlayer = GameLoop.getPlayers()[0];
+  jest
+    .spyOn(Math, "random")
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0.1);
+  humanPlayer.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  humanPlayer.sendAttack([6, 6]);
+  humanPlayer.sendAttack([6, 7]);
+  expect(GameLoop.getPlayers().length).toBeGreaterThan(0);
+  expect(GameLoop.isInProgress()).toBeFalsy();
+  expect(GameLoop.getWinner()).toBeDefined();
+  GameLoop.resetGame();
+  expect(GameLoop.getPlayers().length).toBe(0);
+  expect(GameLoop.isInProgress()).toBeTruthy();
+  expect(GameLoop.getWinner()).toBeUndefined();
+});
