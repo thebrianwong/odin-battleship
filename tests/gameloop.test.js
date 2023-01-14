@@ -110,3 +110,22 @@ test("7) The game ends after a Player loses all their Ships", () => {
   expect(humanPlayer.getGameboard().isAllShipsSunk()).toBeTruthy();
   expect(GameLoop.isInProgress()).toBeFalsy();
 });
+
+test("8) The game know which Player won after the game ends", () => {
+  GameLoop.createGame();
+  const humanPlayer = GameLoop.getPlayers()[0];
+  const computerPlayer = GameLoop.getPlayers()[1];
+  jest
+    .spyOn(Math, "random")
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0.1);
+  humanPlayer.addShipToGameboard(2, [
+    [0, 0],
+    [0, 1],
+  ]);
+  humanPlayer.sendAttack([6, 6]);
+  humanPlayer.sendAttack([6, 7]);
+  expect(GameLoop.getWinner()).toStrictEqual(computerPlayer);
+});
