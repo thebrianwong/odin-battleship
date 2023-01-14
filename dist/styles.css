@@ -7,6 +7,12 @@ body {
   height: 100vh;
 }
 
+button {
+  width: 95%;
+  height: 95%;
+  padding: 0;
+}
+
 .contents {
   display: flex;
   flex-direction: column;
@@ -17,6 +23,18 @@ body {
 }
 
 .gameboard {
-  width: 60vw;
-  height: 55vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  place-items: center;
+  gap: 5px;
+  background-color: #c9f4fe;
+  border: solid 2px lightgray;
+  width: 750px;
+  height: 400px;
+  padding: 5px;
+}
+
+.gameboard div {
+  border: solid 1px lightgray;
 }
