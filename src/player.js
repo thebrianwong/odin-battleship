@@ -114,37 +114,6 @@ const Player = (playerType) => {
         break;
     }
   };
-
-  /*   const staysOnBoard = (startingCoordinates, shipLength, direction) => {
-    switch (direction) {
-      case "up":
-        if (startingCoordinates[1] - (shipLength - 1) > 0) {
-          return true;
-        }
-        return false;
-
-      case "right":
-        if (startingCoordinates[0] + (shipLength - 1) < 9) {
-          return true;
-        }
-        return false;
-
-      case "down":
-        if (startingCoordinates[1] + (shipLength - 1) < 9) {
-          return true;
-        }
-        return false;
-
-      case "left":
-        if (startingCoordinates[0] - (shipLength - 1) > 0) {
-          return true;
-        }
-        return false;
-
-      default:
-        break;
-    }
-  }; */
   const generateRandomCoordinate = () => {
     const BOARDAXESLENGTH = 10;
     return Math.floor(Math.random() * BOARDAXESLENGTH);
