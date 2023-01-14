@@ -5,6 +5,7 @@ import { Player } from "./player";
 const GameLoop = (() => {
   const players = [];
   let inProgress = true;
+  let winner;
   const createGame = () => {
     const humanPlayer = Player("human");
     players.push(humanPlayer);
@@ -18,17 +19,25 @@ const GameLoop = (() => {
   const resetGame = () => {
     players.length = 0;
     inProgress = true;
+    winner = undefined;
   };
-  const endGame = () => {
+  const endGame = (loserPlayer) => {
     inProgress = false;
+    setWinner(loserPlayer);
   };
   const isInProgress = () => inProgress;
+  const setWinner = (loserPlayer) => {
+    const winnerPlayer = loserPlayer.getOpposingPlayer();
+    winner = winnerPlayer;
+  };
+  const getWinner = () => winner;
   return {
     createGame,
     getPlayers,
     resetGame,
     endGame,
     isInProgress,
+    getWinner,
   };
 })();
 
