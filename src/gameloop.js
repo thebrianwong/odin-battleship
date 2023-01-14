@@ -6,6 +6,13 @@ const GameLoop = (() => {
   const players = [];
   let inProgress = true;
   let winner;
+  const getPlayers = () => players;
+  const isInProgress = () => inProgress;
+  const getWinner = () => winner;
+  const setWinner = (loserPlayer) => {
+    const winnerPlayer = loserPlayer.getOpposingPlayer();
+    winner = winnerPlayer;
+  };
   const createGame = () => {
     const humanPlayer = Player("human");
     players.push(humanPlayer);
@@ -15,29 +22,22 @@ const GameLoop = (() => {
     computerPlayer.setOpposingPlayer(humanPlayer);
     computerPlayer.initializeComputerGameboard();
   };
-  const getPlayers = () => players;
+  const endGame = (loserPlayer) => {
+    inProgress = false;
+    setWinner(loserPlayer);
+  };
   const resetGame = () => {
     players.length = 0;
     inProgress = true;
     winner = undefined;
   };
-  const endGame = (loserPlayer) => {
-    inProgress = false;
-    setWinner(loserPlayer);
-  };
-  const isInProgress = () => inProgress;
-  const setWinner = (loserPlayer) => {
-    const winnerPlayer = loserPlayer.getOpposingPlayer();
-    winner = winnerPlayer;
-  };
-  const getWinner = () => winner;
   return {
-    createGame,
     getPlayers,
-    resetGame,
-    endGame,
     isInProgress,
     getWinner,
+    createGame,
+    endGame,
+    resetGame,
   };
 })();
 
