@@ -18,8 +18,8 @@ body {
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(11, 1fr);
-  grid-template-rows: repeat(11, 1fr);
+  grid-template-columns: 15px repeat(10, 1fr);
+  grid-template-rows: 15px repeat(10, 1fr);
   place-items: center;
   gap: 5px;
   background-color: #c9f4fe;
