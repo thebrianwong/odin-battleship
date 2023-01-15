@@ -6,6 +6,7 @@ const DOMController = (() => {
         const cell = document.createElement("button");
         cell.setAttribute("dataRow", i);
         cell.setAttribute("dataColumn", j);
+        // some click event listener where attack is made OR prior to that, placing ship on that cell
         gameboardDOM.appendChild(cell);
       }
     }
