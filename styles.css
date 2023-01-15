@@ -7,12 +7,6 @@ body {
   height: 100vh;
 }
 
-button {
-  width: 95%;
-  height: 95%;
-  padding: 0;
-}
-
 .contents {
   display: flex;
   flex-direction: column;
@@ -24,8 +18,8 @@ button {
 
 .gameboard {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(11, 1fr);
+  grid-template-rows: repeat(11, 1fr);
   place-items: center;
   gap: 5px;
   background-color: #c9f4fe;
@@ -35,6 +29,8 @@ button {
   padding: 5px;
 }
 
-.gameboard div {
-  border: solid 1px lightgray;
+.gameboard-cell {
+  width: 95%;
+  height: 95%;
+  padding: 0;
 }
