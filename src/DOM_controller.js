@@ -8,24 +8,25 @@ const DOMController = (() => {
         if (i === -1) {
           if (j === -1) {
             const invisiblePlaceholderElement = document.createElement("div");
-            invisiblePlaceholderElement.classList.add("gameboard-cell");
+            invisiblePlaceholderElement.classList.add("gameboard-label");
             invisiblePlaceholderElement.style.visibility = "hidden";
             gameboardDOM.appendChild(invisiblePlaceholderElement);
           } else {
             const columnLabelElement = document.createElement("div");
-            columnLabelElement.classList.add("gameboard-cell");
+            columnLabelElement.classList.add("gameboard-label");
             columnLabelElement.textContent = columnLabels[j];
             gameboardDOM.appendChild(columnLabelElement);
           }
         } else if (j === -1) {
           const rowLabelElement = document.createElement("div");
-          rowLabelElement.classList.add("gameboard-cell");
+          rowLabelElement.classList.add("gameboard-label");
           rowLabelElement.textContent = rowLabels[i];
           gameboardDOM.appendChild(rowLabelElement);
         } else {
           const cellElement = document.createElement("button");
           cellElement.setAttribute("dataRow", i);
           cellElement.setAttribute("dataColumn", j);
+          cellElement.classList.add("gameboard-cell");
           // some click event listener where attack is made OR prior to that, placing ship on that cell
           gameboardDOM.appendChild(cellElement);
         }
