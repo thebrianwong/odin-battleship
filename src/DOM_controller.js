@@ -54,16 +54,22 @@ const DOMController = (() => {
     imgBtnPairs.forEach((pair) => {
       const img = pair.children[0];
       const btn = pair.children[1];
-      console.log(img);
       btn.addEventListener(
         "click",
         EventListenerController.rotateShipImage.bind(event, img)
       );
     });
   };
+  const addShipPlacementDrag = () => {
+    const testImage = document.querySelector("img");
+    testImage.addEventListener("dragstart", (event) => {
+      EventListenerController.getDraggedImage(event);
+    });
+  };
   return {
     initializeBoardDOM,
     rotateShipImageListeners,
+    addShipPlacementDrag,
   };
 })();
 
