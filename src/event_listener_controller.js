@@ -25,11 +25,30 @@ const EventListenerController = (() => {
       image.classList.add("horizontal");
     }
   };
+  const rotateDraggedImage = (event) => {
+    const imageElement = event.target;
+    const clonedImageElement = imageElement.cloneNode();
+    const clonedImageElementClasses = Array.from(clonedImageElement.classList);
+    const tempDiv = document.createElement("div");
+    tempDiv.classList.add("temp-rotate");
+    if (clonedImageElementClasses.includes("horizontal")) {
+      tempDiv.classList.add("temp-rotate-horizontal");
+    } else if (clonedImageElementClasses.includes("vertical")) {
+      tempDiv.classList.add("temp-rotate-vertical");
+    }
+    tempDiv.appendChild(clonedImageElement);
+    document.body.appendChild(tempDiv);
+    event.dataTransfer.setDragImage(tempDiv, 0, 0);
+    setTimeout(() => {
+      document.body.removeChild(tempDiv);
+    }, 0);
+  };
   return {
     getDraggedImage,
     dragOver,
     insertDraggedImage,
     rotateShipImage,
+    rotateDraggedImage,
   };
 })();
 

@@ -64,6 +64,7 @@ const DOMController = (() => {
     const testImage = document.querySelector("img");
     testImage.addEventListener("dragstart", (event) => {
       EventListenerController.getDraggedImage(event);
+      EventListenerController.rotateDraggedImage(event);
     });
   };
   return {
