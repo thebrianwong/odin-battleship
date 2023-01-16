@@ -53,7 +53,7 @@ const DOMController = (() => {
     const imgBtnPairs = document.querySelectorAll(".img-btn-pair");
     imgBtnPairs.forEach((pair) => {
       const img = pair.children[0];
-      const btn = pair.children[1];
+      const btn = pair.children[2];
       btn.addEventListener(
         "click",
         EventListenerController.rotateShipImage.bind(event, img)

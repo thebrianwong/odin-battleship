@@ -12,7 +12,49 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 10px 0 auto;
+}
+
+.ship-container {
+  display: flex;
+  flex-direction: column;
+  gap: 75px;
+  margin-right: auto;
+  width: 25%;
+}
+
+.ship-container div:nth-child(1) {
+  margin-top: auto;
+}
+
+.ship-container div:last-child {
+  margin-bottom: auto;
+}
+
+.img-btn-pair {
+  display: flex;
+  justify-content: space-between;
+  height: 34px;
+}
+
+.ship-piece {
+  height: 100%;
+}
+
+.five-length-piece {
+  width: 177px;
+}
+
+.four-length-piece {
+  width: 133px;
+}
+
+.three-length-piece {
+  width: 100px;
+}
+
+.two-length-piece {
+  width: 67px;
 }
 
 .gameboard {
