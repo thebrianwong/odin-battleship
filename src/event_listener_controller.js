@@ -17,12 +17,12 @@ const EventListenerController = (() => {
   };
   const rotateShipImage = (image) => {
     const imageClasses = Array.from(image.classList);
-    if (imageClasses.includes("face-left")) {
-      image.classList.remove("face-left");
-      image.classList.add("face-up");
-    } else if (imageClasses.includes("face-up")) {
-      image.classList.remove("face-up");
-      image.classList.add("face-right");
+    if (imageClasses.includes("horizontal")) {
+      image.classList.remove("horizontal");
+      image.classList.add("vertical");
+    } else if (imageClasses.includes("vertical")) {
+      image.classList.remove("vertical");
+      image.classList.add("horizontal");
     } else if (imageClasses.includes("face-right")) {
       image.classList.remove("face-right");
       image.classList.add("face-down");
