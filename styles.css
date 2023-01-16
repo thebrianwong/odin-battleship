@@ -34,7 +34,13 @@ body {
 .ship-placement {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 34px;
+}
+
+.ship-info {
+  margin-left: auto;
+  margin-right: 5px;
 }
 
 .ship-piece {
