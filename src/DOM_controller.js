@@ -15,13 +15,13 @@ const DOMController = (() => {
             gameboardDOM.appendChild(invisiblePlaceholderElement);
           } else {
             const columnLabelElement = document.createElement("div");
-            columnLabelElement.classList.add("gameboard-label");
+            columnLabelElement.classList.add("column-label");
             columnLabelElement.textContent = columnLabels[j];
             gameboardDOM.appendChild(columnLabelElement);
           }
         } else if (j === -1) {
           const rowLabelElement = document.createElement("div");
-          rowLabelElement.classList.add("gameboard-label");
+          rowLabelElement.classList.add("row-label");
           rowLabelElement.textContent = rowLabels[i];
           gameboardDOM.appendChild(rowLabelElement);
         } else {

@@ -22,7 +22,15 @@ body {
   place-items: center;
   background-color: #c9f4fe;
   border: solid 2px lightgray;
-  padding: 5px;
+  padding: 15px;
+}
+
+.column-label {
+  margin-bottom: 10px;
+}
+
+.row-label {
+  margin-right: 10px;
 }
 
 .gameboard-cell {
