@@ -25,17 +25,29 @@ const EventListenerController = (() => {
       image.classList.add("horizontal");
     }
   };
-  const rotateDraggedImage = (event) => {
-    const imageElement = event.target;
-    const clonedImageElement = imageElement.cloneNode();
+  const rotatePerLength = (tempDiv, clonedImageElement) => {
     const clonedImageElementClasses = Array.from(clonedImageElement.classList);
-    const tempDiv = document.createElement("div");
-    tempDiv.classList.add("temp-rotate");
     if (clonedImageElementClasses.includes("horizontal")) {
       tempDiv.classList.add("temp-rotate-horizontal");
     } else if (clonedImageElementClasses.includes("vertical")) {
       tempDiv.classList.add("temp-rotate-vertical");
+      if (clonedImageElement.dataset.shipLength === "5") {
+        tempDiv.classList.add("temp-rotate-vertical-5");
+      } else if (clonedImageElement.dataset.shipLength === "4") {
+        tempDiv.classList.add("temp-rotate-vertical-4");
+      } else if (clonedImageElement.dataset.shipLength === "3") {
+        tempDiv.classList.add("temp-rotate-vertical-3");
+      } else if (clonedImageElement.dataset.shipLength === "2") {
+        tempDiv.classList.add("temp-rotate-vertical-2");
+      }
     }
+  };
+  const rotateDraggedImage = (event) => {
+    const imageElement = event.target;
+    const clonedImageElement = imageElement.cloneNode();
+    const tempDiv = document.createElement("div");
+    tempDiv.classList.add("temp-rotate");
+    rotatePerLength(tempDiv, clonedImageElement);
     tempDiv.appendChild(clonedImageElement);
     document.body.appendChild(tempDiv);
     event.dataTransfer.setDragImage(tempDiv, 0, 0);
