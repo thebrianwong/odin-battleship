@@ -38,6 +38,31 @@ body {
   height: 100%;
 }
 
+.ship-image-5 {
+  background-image: url(./5length.gif);
+  background-repeat: no-repeat;
+}
+
+.ship-image-5-1 {
+  background-position: 0px ;
+}
+
+.ship-image-5-2 {
+  background-position: -35.6px;
+}
+
+.ship-image-5-3 {
+  background-position: -71.2px;
+}
+
+.ship-image-5-4 {
+  background-position: -106.8px;
+}
+
+.ship-image-5-5 {
+  background-position: -142.4px;
+}
+
 img {
   width: 100px;
   height: fit-content;
