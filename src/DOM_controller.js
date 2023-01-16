@@ -1,3 +1,5 @@
+import { EventListenerController } from "./event_listener_controller";
+
 const DOMController = (() => {
   const createBoardCells = (gameboardDOM) => {
     const BOARDAXESLENGTH = 10;
@@ -27,6 +29,14 @@ const DOMController = (() => {
           cellElement.setAttribute("dataRow", i);
           cellElement.setAttribute("dataColumn", j);
           cellElement.classList.add("gameboard-cell");
+          cellElement.addEventListener(
+            "dragover",
+            EventListenerController.dragOver.bind(event)
+          );
+          cellElement.addEventListener(
+            "drop",
+            EventListenerController.insertDraggedImage.bind(event)
+          );
           // some click event listener where attack is made OR prior to that, placing ship on that cell
           gameboardDOM.appendChild(cellElement);
         }
