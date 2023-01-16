@@ -23,12 +23,6 @@ const EventListenerController = (() => {
     } else if (imageClasses.includes("vertical")) {
       image.classList.remove("vertical");
       image.classList.add("horizontal");
-    } else if (imageClasses.includes("face-right")) {
-      image.classList.remove("face-right");
-      image.classList.add("face-down");
-    } else if (imageClasses.includes("face-down")) {
-      image.classList.remove("face-down");
-      image.classList.add("face-left");
     }
   };
   return {
