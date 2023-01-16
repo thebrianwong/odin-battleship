@@ -75,3 +75,19 @@ img {
   width: 100px;
   height: fit-content;
 }
+
+.face-left {
+  transform: rotate(0);
+}
+
+.face-up {
+  transform: rotate(90deg);
+}
+
+.face-right {
+  transform: rotate(180deg);
+}
+
+.face-down {
+  transform: rotate(270deg);
+}
