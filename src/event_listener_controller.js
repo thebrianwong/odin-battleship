@@ -11,7 +11,7 @@ const EventListenerController = (() => {
     if (image === "") {
       return;
     }
-    event.target.classList.add("ship-image");
+    event.target.classList.add("ship-image-5");
     event.target.classList.add("ship-image-5-3");
     event.target.removeEventListener("drop", insertDraggedImage);
   };
