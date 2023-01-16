@@ -31,7 +31,7 @@ body {
   margin-bottom: auto;
 }
 
-.img-btn-pair {
+.ship-placement {
   display: flex;
   justify-content: space-between;
   height: 34px;
