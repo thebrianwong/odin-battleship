@@ -49,8 +49,21 @@ const DOMController = (() => {
     createBoardCells(humanPlayerGameboardDOM);
     createBoardCells(opponentGameboardDOM);
   };
+  const rotateShipImageListeners = () => {
+    const imgBtnPairs = document.querySelectorAll(".img-btn-pair");
+    imgBtnPairs.forEach((pair) => {
+      const img = pair.children[0];
+      const btn = pair.children[1];
+      console.log(img);
+      btn.addEventListener(
+        "click",
+        EventListenerController.rotateShipImage.bind(event, img)
+      );
+    });
+  };
   return {
     initializeBoardDOM,
+    rotateShipImageListeners,
   };
 })();
 
