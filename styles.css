@@ -143,12 +143,50 @@ img {
   height: 38px;
 }
 
-.temp-rotate-vertical {
+.temp-rotate-vertical img {
+  transform-origin: left bottom;
+}
+
+.temp-rotate-vertical-5 {
+  width: 34px;
+  height: 177px;
+}
+
+.temp-rotate-vertical-5 > .five-length-piece.vertical {
+  width: 177px;
+  height: 34px;
+  transform: rotate(90deg) translateX(-20%);
+}
+
+.temp-rotate-vertical-4 {
+  width: 38px;
+  height: 133px;
+}
+
+.temp-rotate-vertical-4 > .four-length-piece.vertical {
+  width: 133px;
+  height: 34px;
+  transform: rotate(90deg) translateX(-25%);
+}
+
+.temp-rotate-vertical-3 {
   width: 38px;
   height: 100px;
 }
 
-.temp-rotate-vertical img {
-  transform-origin: left bottom;
-  transform: rotate(90deg) translateX(-40%);
+.temp-rotate-vertical-3 > .three-length-piece.vertical {
+  width: 100px;
+  height: 34px;
+  transform: rotate(90deg) translateX(-33%);
+}
+
+.temp-rotate-vertical-2 {
+  width: 38px;
+  height: 67px;
+}
+
+.temp-rotate-vertical-2 > .two-length-piece.vertical {
+  width: 67px;
+  height: 34px;
+  transform: rotate(90deg) translateX(-50%);
 }
