@@ -1,14 +1,23 @@
 const EventListenerController = (() => {
   const getDraggedImage = (event) => {
-    event.dataTransfer.setData("image", event.target.src);
+    const dataObject = {
+      image: event.target.src,
+      shipLength: event.target.dataset.shipLength,
+    };
+    const dataString = JSON.stringify(dataObject);
+    event.dataTransfer.setData("image", dataString);
   };
   const dragOver = () => {
     event.preventDefault();
   };
+  // const determine
   const insertDraggedImage = (event) => {
     event.preventDefault();
-    const image = event.dataTransfer.getData("image");
-    if (image === "") {
+    const dataString = event.dataTransfer.getData("image");
+    const dataObject = JSON.parse(dataString);
+    const draggedImage = dataObject.image;
+    const length = dataObject.shipLength;
+    if (draggedImage === "") {
       return;
     }
     event.target.classList.add("ship-image-5");
