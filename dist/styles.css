@@ -20,7 +20,6 @@ body {
   grid-template-columns: 15px repeat(10, 37.5px);
   grid-template-rows: 15px repeat(10, 37.5px);
   place-items: center;
-  gap: 5px;
   background-color: #c9f4fe;
   border: solid 2px lightgray;
   padding: 5px;
