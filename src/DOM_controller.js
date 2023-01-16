@@ -61,10 +61,12 @@ const DOMController = (() => {
     });
   };
   const addShipPlacementDrag = () => {
-    const testImage = document.querySelector("img");
-    testImage.addEventListener("dragstart", (event) => {
-      EventListenerController.getDraggedImage(event);
-      EventListenerController.rotateDraggedImage(event);
+    const shipImages = Array.from(document.querySelectorAll(".ship-piece"));
+    shipImages.forEach((ship) => {
+      ship.addEventListener("dragstart", (event) => {
+        EventListenerController.getDraggedImage(event);
+        EventListenerController.rotateDraggedImage(event);
+      });
     });
   };
   return {
