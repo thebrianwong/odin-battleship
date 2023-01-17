@@ -94,9 +94,13 @@ body {
   height: 100%;
 }
 
-.ship-image-5 {
-  background-image: url(./5length.gif);
+.ship-image {
+  background-image: url(./ship_transparent_background.gif);
   background-repeat: no-repeat;
+}
+
+.ship-image-5 {
+  background-size: 178px 35px;
 }
 
 .ship-image-5-1 {
@@ -119,6 +123,53 @@ body {
   background-position: -142.4px;
 }
 
+.ship-image-4 {
+  background-size: 133px 35px;
+}
+
+.ship-image-4-1 {
+  background-position: 0px;
+}
+
+.ship-image-4-2 {
+  background-position: -33.25px;
+}
+
+.ship-image-4-3 {
+  background-position: -66.5px;
+}
+
+.ship-image-4-4 {
+  background-position: -99.75px;
+}
+
+.ship-image-3 {
+  background-size: 100px 35px;
+}
+
+.ship-image-3-1 {
+  background-position: 0px;
+}
+
+.ship-image-3-2 {
+  background-position: -33px;
+}
+
+.ship-image-3-3 {
+  background-position: -67px;
+}
+
+.ship-image-2 {
+  background-size: 67px 35px;
+}
+
+.ship-image-2-1 {
+  background-position: 0px;
+}
+
+.ship-image-2-2 {
+  background-position: -33px;
+}
 img {
   width: 100px;
   height: fit-content;
