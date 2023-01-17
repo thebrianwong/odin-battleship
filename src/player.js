@@ -1,6 +1,7 @@
 import { Ship } from "./ship";
 import { Gameboard } from "./gameboard";
 import { GameLoop } from "./gameloop";
+import { DOMController } from "./DOM_controller";
 
 const Player = (playerType) => {
   const determinePlayerType = () => {
@@ -29,6 +30,9 @@ const Player = (playerType) => {
     const attackResults = opposingPlayer.receiveAttack(coordinates);
     if (attackResults === "hit") {
       playerGameboard.addSentHitShot(coordinates);
+      if (!isComputer()) {
+        DOMController.addHitShotDOM("opponent", coordinates);
+      }
       if (opposingPlayerGameboard.isAllShipsSunk()) {
         GameLoop.endGame(opposingPlayer);
         return;

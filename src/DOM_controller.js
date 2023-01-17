@@ -54,6 +54,12 @@ const DOMController = (() => {
             cellElement.setAttribute("data-row", i);
             cellElement.setAttribute("data-column", j);
             cellElement.classList.add("gameboard-cell");
+            cellElement.addEventListener("click", (event) => {
+              console.log(cellElement);
+              const cellRow = Number(cellElement.dataset.row);
+              const cellColumn = Number(cellElement.dataset.column);
+              GameLoop.getPlayers()[0].sendAttack([cellRow, cellColumn]);
+            });
             gameboardDOM.appendChild(cellElement);
           }
           // some click event listener where attack is made OR prior to that, placing ship on that cell
@@ -231,6 +237,16 @@ const DOMController = (() => {
       document.body.removeChild(tempDiv);
     }, 0);
   };
+  const addHitShotDOM = (playerType, coordinates) => {
+    const cellRow = coordinates[0];
+    const cellColumn = coordinates[1];
+    console.log(playerType);
+    const gameboardDOM = document.querySelector(`.${playerType}-board`);
+    const targetCell = gameboardDOM.querySelector(
+      `[data-row='${cellRow}'][data-column='${cellColumn}']`
+    );
+    targetCell.textContent = "owie";
+  };
   return {
     initializeBoardDOM,
     insertDraggedImage,
@@ -238,6 +254,7 @@ const DOMController = (() => {
     rotateDraggedImage,
     getDraggedImage,
     dragOver,
+    addHitShotDOM,
   };
 })();
 
