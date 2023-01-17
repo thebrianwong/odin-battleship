@@ -241,3 +241,7 @@ img {
   height: 34px;
   transform: rotate(90deg) translateX(-50%);
 }
+
+.disabled-image {
+  filter: contrast(0%);
+}
