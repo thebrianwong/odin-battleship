@@ -25,18 +25,39 @@ const DOMController = (() => {
           rowLabelElement.textContent = rowLabels[i];
           gameboardDOM.appendChild(rowLabelElement);
         } else {
-          const cellElement = document.createElement("div");
-          cellElement.setAttribute("data-row", i);
-          cellElement.setAttribute("data-column", j);
-          cellElement.classList.add("gameboard-cell");
-          cellElement.addEventListener("dragover", (event) => {
-            dragOver(event);
-          });
-          cellElement.addEventListener("drop", (event) => {
-            insertDraggedImage(event);
-          });
+          // const cellElement = document.createElement("div");
+          // cellElement.setAttribute("data-row", i);
+          // cellElement.setAttribute("data-column", j);
+          // cellElement.classList.add("gameboard-cell");
+          // cellElement.addEventListener("dragover", (event) => {
+          //   dragOver(event);
+          // });
+          // cellElement.addEventListener("drop", (event) => {
+          //   insertDraggedImage(event);
+          // });
+          if (Array.from(gameboardDOM.classList).includes("player-board")) {
+            const cellElement = document.createElement("div");
+            cellElement.setAttribute("data-row", i);
+            cellElement.setAttribute("data-column", j);
+            cellElement.classList.add("gameboard-cell");
+            cellElement.addEventListener("dragover", (event) => {
+              dragOver(event);
+            });
+            cellElement.addEventListener("drop", (event) => {
+              insertDraggedImage(event);
+            });
+            gameboardDOM.appendChild(cellElement);
+          } else if (
+            Array.from(gameboardDOM.classList).includes("opponent-board")
+          ) {
+            const cellElement = document.createElement("button");
+            cellElement.setAttribute("data-row", i);
+            cellElement.setAttribute("data-column", j);
+            cellElement.classList.add("gameboard-cell");
+            gameboardDOM.appendChild(cellElement);
+          }
           // some click event listener where attack is made OR prior to that, placing ship on that cell
-          gameboardDOM.appendChild(cellElement);
+          // gameboardDOM.appendChild(cellElement);
         }
       }
     }
