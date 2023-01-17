@@ -26,8 +26,8 @@ const DOMController = (() => {
           gameboardDOM.appendChild(rowLabelElement);
         } else {
           const cellElement = document.createElement("div");
-          cellElement.setAttribute("dataRow", i);
-          cellElement.setAttribute("dataColumn", j);
+          cellElement.setAttribute("data-row", i);
+          cellElement.setAttribute("data-column", j);
           cellElement.classList.add("gameboard-cell");
           cellElement.addEventListener(
             "dragover",
