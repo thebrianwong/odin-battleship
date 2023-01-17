@@ -101,6 +101,42 @@ const DOMController = (() => {
       return false;
     }
   };
+  const addShipToDOM = (targetCell, dataObject) => {
+    const length = dataObject.shipLength;
+    const targetCellRow = Number(targetCell.dataset.row);
+    const targetCellColumn = Number(targetCell.dataset.column);
+    targetCell.classList.add("contains-ship-image");
+    targetCell.classList.add("ship-image");
+    targetCell.classList.add(`ship-image-${length}`);
+    targetCell.classList.add(`ship-image-${length}-1`);
+    if (dataObject.horizontal) {
+      targetCell.classList.add("horizontal");
+    } else if (dataObject.vertical) {
+      targetCell.classList.add("vertical");
+    }
+    for (let i = 1; i < length; i++) {
+      let remainingCell;
+      if (dataObject.horizontal) {
+        remainingCell = document.querySelector(
+          `.player-board [data-row='${targetCellRow}'][data-column='${
+            targetCellColumn + i
+          }']`
+        );
+        remainingCell.classList.add("horizontal");
+      } else if (dataObject.vertical) {
+        remainingCell = document.querySelector(
+          `.player-board [data-row='${
+            targetCellRow + i
+          }'][data-column='${targetCellColumn}']`
+        );
+        remainingCell.classList.add("vertical");
+      }
+      remainingCell.classList.add("contains-ship-image");
+      remainingCell.classList.add("ship-image");
+      remainingCell.classList.add(`ship-image-${length}`);
+      remainingCell.classList.add(`ship-image-${length}-${i + 1}`);
+    }
+  };
   const insertDraggedImage = (event) => {
     event.preventDefault();
     const targetCell = event.target;
@@ -113,10 +149,7 @@ const DOMController = (() => {
       // probably make some DOM error message appear
       return;
     }
-    targetCell.classList.add("contains-ship-image");
-    targetCell.classList.add("ship-image");
-    targetCell.classList.add("ship-image-5");
-    targetCell.classList.add("ship-image-5-2");
+    addShipToDOM(targetCell, dataObject);
     targetCell.removeEventListener("drop", insertDraggedImage);
   };
   const rotateShipImage = (image) => {
