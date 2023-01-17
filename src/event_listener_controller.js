@@ -13,6 +13,10 @@ const EventListenerController = (() => {
   // const determine
   const insertDraggedImage = (event) => {
     event.preventDefault();
+    const targetCell = event.target;
+    if (Array.from(targetCell.classList).includes("contains-ship-image")) {
+      return;
+    }
     const dataString = event.dataTransfer.getData("image");
     const dataObject = JSON.parse(dataString);
     const draggedImage = dataObject.image;
@@ -20,9 +24,10 @@ const EventListenerController = (() => {
     if (draggedImage === "") {
       return;
     }
-    event.target.classList.add("ship-image-5");
-    event.target.classList.add("ship-image-5-3");
-    event.target.removeEventListener("drop", insertDraggedImage);
+    targetCell.classList.add("contains-ship-image");
+    targetCell.classList.add("ship-image-5");
+    targetCell.classList.add("ship-image-5-3");
+    targetCell.removeEventListener("drop", insertDraggedImage);
   };
   const rotateShipImage = (image) => {
     const imageClasses = Array.from(image.classList);
