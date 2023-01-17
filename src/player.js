@@ -247,6 +247,7 @@ const Player = (playerType) => {
     initializeComputerGameboard,
     sendComputerAttack,
     receiveAttack,
+    checkIfValidEmptyCoordinates,
   };
 };
 
