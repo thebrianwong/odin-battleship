@@ -105,6 +105,7 @@ const DOMController = (() => {
     const length = dataObject.shipLength;
     const targetCellRow = Number(targetCell.dataset.row);
     const targetCellColumn = Number(targetCell.dataset.column);
+    const coordinatesArray = [[targetCellRow, targetCellColumn]];
     targetCell.classList.add("contains-ship-image");
     targetCell.classList.add("ship-image");
     targetCell.classList.add(`ship-image-${length}`);
@@ -123,6 +124,7 @@ const DOMController = (() => {
           }']`
         );
         remainingCell.classList.add("horizontal");
+        coordinatesArray.push([targetCellRow, targetCellColumn + i]);
       } else if (dataObject.vertical) {
         remainingCell = document.querySelector(
           `.player-board [data-row='${
@@ -130,12 +132,14 @@ const DOMController = (() => {
           }'][data-column='${targetCellColumn}']`
         );
         remainingCell.classList.add("vertical");
+        coordinatesArray.push([targetCellRow + i, targetCellColumn]);
       }
       remainingCell.classList.add("contains-ship-image");
       remainingCell.classList.add("ship-image");
       remainingCell.classList.add(`ship-image-${length}`);
       remainingCell.classList.add(`ship-image-${length}-${i + 1}`);
     }
+    return coordinatesArray;
   };
   const insertDraggedImage = (event) => {
     event.preventDefault();
@@ -149,7 +153,11 @@ const DOMController = (() => {
       // probably make some DOM error message appear
       return;
     }
-    addShipToDOM(targetCell, dataObject);
+    const shipCoordinates = addShipToDOM(targetCell, dataObject);
+    GameLoop.getPlayers()[0].addShipToGameboard(
+      Number(dataObject.shipLength),
+      shipCoordinates
+    );
     targetCell.removeEventListener("drop", insertDraggedImage);
   };
   const rotateShipImage = (image) => {
