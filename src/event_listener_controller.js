@@ -3,14 +3,36 @@ const EventListenerController = (() => {
     const dataObject = {
       image: event.target.src,
       shipLength: event.target.dataset.shipLength,
+      horizontal: false,
+      vertical: false,
     };
+    if (Array.from(event.target.classList).includes("horizontal")) {
+      dataObject.horizontal = true;
+    } else if (Array.from(event.target.classList).includes("vertical")) {
+      dataObject.vertical = true;
+    }
+    console.log(dataObject);
     const dataString = JSON.stringify(dataObject);
     event.dataTransfer.setData("image", dataString);
   };
   const dragOver = () => {
     event.preventDefault();
   };
-  // const determine
+  const isValidGameboardCell = (targetCell, dataObject) => {
+    if (dataObject.horizontal) {
+      if (
+        Number(targetCell.dataset.column) + Number(dataObject.shipLength) >
+        10
+      ) {
+        return false;
+      }
+    } else if (dataObject.vertical) {
+      if (Number(targetCell.dataset.row) + Number(dataObject.shipLength) > 10) {
+        return false;
+      }
+    }
+    return true;
+  };
   const insertDraggedImage = (event) => {
     event.preventDefault();
     const targetCell = event.target;
@@ -19,11 +41,12 @@ const EventListenerController = (() => {
     }
     const dataString = event.dataTransfer.getData("image");
     const dataObject = JSON.parse(dataString);
-    const draggedImage = dataObject.image;
-    const length = dataObject.shipLength;
-    if (draggedImage === "") {
-      return;
-    }
+    // const draggedImage = dataObject.image;
+    // const length = dataObject.shipLength;
+    // if (draggedImage === "") {
+    //   return;
+    // }
+    isValidGameboardCell(targetCell, dataObject);
     targetCell.classList.add("contains-ship-image");
     targetCell.classList.add("ship-image-5");
     targetCell.classList.add("ship-image-5-3");
