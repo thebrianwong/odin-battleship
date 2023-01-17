@@ -47,6 +47,7 @@ const DOMController = (() => {
       shipLength: event.target.dataset.shipLength,
       horizontal: false,
       vertical: false,
+      elementID: event.target.getAttribute("id"),
     };
     if (Array.from(event.target.classList).includes("horizontal")) {
       dataObject.horizontal = true;
@@ -141,6 +142,14 @@ const DOMController = (() => {
     }
     return coordinatesArray;
   };
+  const disableImageButtonInteractions = (dataObject) => {
+    const ID = dataObject.elementID;
+    const imageElement = document.querySelector(`#${ID}`);
+    const buttonElement = imageElement.parentNode.querySelector("button");
+    imageElement.setAttribute("draggable", false);
+    imageElement.classList.add("disabled-image");
+    buttonElement.disabled = true;
+  };
   const insertDraggedImage = (event) => {
     event.preventDefault();
     const targetCell = event.target;
@@ -158,6 +167,7 @@ const DOMController = (() => {
       Number(dataObject.shipLength),
       shipCoordinates
     );
+    disableImageButtonInteractions(dataObject);
     targetCell.removeEventListener("drop", insertDraggedImage);
   };
   const rotateShipImage = (image) => {
