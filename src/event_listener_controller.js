@@ -1,3 +1,5 @@
+import { GameLoop } from "./gameloop";
+
 const EventListenerController = (() => {
   const getDraggedImage = (event) => {
     const dataObject = {
@@ -19,19 +21,39 @@ const EventListenerController = (() => {
     event.preventDefault();
   };
   const isValidGameboardCell = (targetCell, dataObject) => {
+    const cellCoordinates = [
+      Number(targetCell.dataset.row),
+      Number(targetCell.dataset.column),
+    ];
+    const length = Number(dataObject.shipLength);
     if (dataObject.horizontal) {
       if (
-        Number(targetCell.dataset.column) + Number(dataObject.shipLength) >
-        10
+        GameLoop.getPlayers()[0].checkIfValidEmptyCoordinates(
+          cellCoordinates,
+          length,
+          "right"
+        )
       ) {
-        return false;
+        console.log("fits");
+        return true;
       }
-    } else if (dataObject.vertical) {
-      if (Number(targetCell.dataset.row) + Number(dataObject.shipLength) > 10) {
-        return false;
-      }
+      console.log("nope");
+      return false;
     }
-    return true;
+    if (dataObject.vertical) {
+      if (
+        GameLoop.getPlayers()[0].checkIfValidEmptyCoordinates(
+          cellCoordinates,
+          length,
+          "down"
+        )
+      ) {
+        console.log("fits");
+        return true;
+      }
+      console.log("nope");
+      return false;
+    }
   };
   const insertDraggedImage = (event) => {
     event.preventDefault();
@@ -41,12 +63,10 @@ const EventListenerController = (() => {
     }
     const dataString = event.dataTransfer.getData("image");
     const dataObject = JSON.parse(dataString);
-    // const draggedImage = dataObject.image;
-    // const length = dataObject.shipLength;
-    // if (draggedImage === "") {
-    //   return;
-    // }
-    isValidGameboardCell(targetCell, dataObject);
+    if (!isValidGameboardCell(targetCell, dataObject)) {
+      // probably make some DOM error message appear
+      return;
+    }
     targetCell.classList.add("contains-ship-image");
     targetCell.classList.add("ship-image-5");
     targetCell.classList.add("ship-image-5-3");
