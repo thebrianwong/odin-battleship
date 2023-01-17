@@ -29,14 +29,12 @@ const DOMController = (() => {
           cellElement.setAttribute("data-row", i);
           cellElement.setAttribute("data-column", j);
           cellElement.classList.add("gameboard-cell");
-          cellElement.addEventListener(
-            "dragover",
-            EventListenerController.dragOver.bind(event)
-          );
-          cellElement.addEventListener(
-            "drop",
-            EventListenerController.insertDraggedImage.bind(event)
-          );
+          cellElement.addEventListener("dragover", (event) => {
+            EventListenerController.dragOver(event);
+          });
+          cellElement.addEventListener("drop", (event) => {
+            EventListenerController.insertDraggedImage(event);
+          });
           // some click event listener where attack is made OR prior to that, placing ship on that cell
           gameboardDOM.appendChild(cellElement);
         }
@@ -51,13 +49,12 @@ const DOMController = (() => {
   };
   const rotateShipImageListeners = () => {
     const shipPlacementElements = document.querySelectorAll(".ship-placement");
-    shipPlacementElements.forEach((pair) => {
-      const img = pair.children[0];
-      const btn = pair.children[2];
-      btn.addEventListener(
-        "click",
-        EventListenerController.rotateShipImage.bind(event, img)
-      );
+    shipPlacementElements.forEach((group) => {
+      const img = group.children[0];
+      const btn = group.children[2];
+      btn.addEventListener("click", () => {
+        EventListenerController.rotateShipImage(img);
+      });
     });
   };
   const addShipPlacementDrag = () => {
