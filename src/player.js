@@ -45,9 +45,6 @@ const Player = (playerType) => {
       }
     } else if (attackResults === "miss") {
       playerGameboard.addSentMissedShot(coordinates);
-    }
-    if (opposingPlayer.isComputer()) {
-      opposingPlayer.sendComputerAttack();
       if (!isComputer()) {
         DOMController.addAttackResultDOM(
           "opponent",
@@ -57,6 +54,9 @@ const Player = (playerType) => {
       } else if (isComputer()) {
         DOMController.addAttackResultDOM("player", attackResults, coordinates);
       }
+    }
+    if (opposingPlayer.isComputer()) {
+      opposingPlayer.sendComputerAttack();
     }
   };
   const initializeComputerGameboard = () => {
