@@ -245,7 +245,14 @@ const DOMController = (() => {
     const targetCell = gameboardDOM.querySelector(
       `[data-row='${cellRow}'][data-column='${cellColumn}']`
     );
-    targetCell.textContent = attackResults;
+    const attackResultsElement = document.createElement("img");
+    attackResultsElement.classList.add("attack-results");
+    targetCell.appendChild(attackResultsElement);
+    if (attackResults === "hit") {
+      attackResultsElement.setAttribute("src", "../dist/red_X.png");
+    } else {
+      attackResultsElement.setAttribute("src", "../dist/white_O.png");
+    }
   };
   return {
     initializeBoardDOM,
