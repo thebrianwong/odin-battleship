@@ -45,6 +45,12 @@ const DOMController = (() => {
             });
             cellElement.addEventListener("drop", (event) => {
               insertDraggedImage(event);
+              if (
+                GameLoop.getPlayers()[0].getGameboard().getPlacedShips()
+                  .length === 5
+              ) {
+                enableComputerGameboard();
+              }
             });
             gameboardDOM.appendChild(cellElement);
           } else if (
@@ -54,6 +60,7 @@ const DOMController = (() => {
             cellElement.setAttribute("data-row", i);
             cellElement.setAttribute("data-column", j);
             cellElement.classList.add("gameboard-cell");
+            cellElement.disabled = true;
             cellElement.addEventListener("click", (event) => {
               console.log(cellElement);
               const cellRow = Number(cellElement.dataset.row);
@@ -67,6 +74,15 @@ const DOMController = (() => {
         }
       }
     }
+  };
+  const enableComputerGameboard = () => {
+    const computerGameboardElement = document.querySelector(".opponent-board");
+    const cellElements = Array.from(
+      computerGameboardElement.querySelectorAll(".gameboard-cell")
+    );
+    cellElements.forEach((cellElement) => {
+      cellElement.disabled = false;
+    });
   };
   const getDraggedImage = (event) => {
     const dataObject = {
