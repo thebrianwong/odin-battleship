@@ -253,3 +253,8 @@ img {
 button.gameboard-cell:active {
   box-shadow: inset 0 0 5px 0px #232b2b;
 }
+
+.gameboard-cell img.attack-results {
+  width: 95%;
+  height: 95%;
+}
