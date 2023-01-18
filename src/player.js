@@ -34,8 +34,8 @@ const Player = (playerType) => {
       .getGameboard()
       .getReceivedHitShots();
     if (
-      checkIfPreviouslyAttacked(receivedMissedShots, coordinates) ||
-      checkIfPreviouslyAttacked(receivedHitShots, coordinates)
+      checkIfPreviouslyAttacked(/* receivedMissedShots,  */ coordinates) ||
+      checkIfPreviouslyAttacked(/* receivedHitShots,  */ coordinates)
     ) {
       return;
     }
@@ -169,14 +169,35 @@ const Player = (playerType) => {
     return Math.floor(Math.random() * BOARDAXESLENGTH);
   };
   const checkIfPreviouslyAttacked = (
-    opposingPlayerReceivedShots,
+    /* opposingPlayerReceivedShots, */
+    // opposingPlayer,
     attackCoordinates
   ) =>
-    opposingPlayerReceivedShots.some(
-      (receivedShot) =>
-        receivedShot[0] === attackCoordinates[0] &&
-        receivedShot[1] === attackCoordinates[1]
-    );
+    // opposingPlayerReceivedShots.some(
+    //   (receivedShot) =>
+    //     receivedShot[0] === attackCoordinates[0] &&
+    //     receivedShot[1] === attackCoordinates[1]
+    // );
+    {
+      let previouslyAttacked = false;
+      const receivedMissedShots = opposingPlayer
+        .getGameboard()
+        .getReceivedMissedShots();
+      const receivedHitShots = opposingPlayer
+        .getGameboard()
+        .getReceivedHitShots();
+      previouslyAttacked = receivedMissedShots.some(
+        (shot) =>
+          shot[0] === attackCoordinates[0] && shot[1] === attackCoordinates[1]
+      );
+      if (!previouslyAttacked) {
+        previouslyAttacked = receivedHitShots.some(
+          (shot) =>
+            shot[0] === attackCoordinates[0] && shot[1] === attackCoordinates[1]
+        );
+      }
+      return previouslyAttacked;
+    };
   const generateAttackCoordinates = () => {
     const receivedMissedShots = opposingPlayer
       .getGameboard()
@@ -189,8 +210,8 @@ const Player = (playerType) => {
       attackCoordinates[0] = generateRandomCoordinate();
       attackCoordinates[1] = generateRandomCoordinate();
     } while (
-      checkIfPreviouslyAttacked(receivedMissedShots, attackCoordinates) ||
-      checkIfPreviouslyAttacked(receivedHitShots, attackCoordinates)
+      checkIfPreviouslyAttacked(/* receivedMissedShots, */ attackCoordinates) ||
+      checkIfPreviouslyAttacked(/* receivedHitShots,  */ attackCoordinates)
     );
     return attackCoordinates;
   };
