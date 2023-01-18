@@ -237,7 +237,7 @@ const DOMController = (() => {
       document.body.removeChild(tempDiv);
     }, 0);
   };
-  const addHitShotDOM = (playerType, coordinates) => {
+  const addAttackResultDOM = (playerType, attackResults, coordinates) => {
     const cellRow = coordinates[0];
     const cellColumn = coordinates[1];
     console.log(playerType);
@@ -245,7 +245,7 @@ const DOMController = (() => {
     const targetCell = gameboardDOM.querySelector(
       `[data-row='${cellRow}'][data-column='${cellColumn}']`
     );
-    targetCell.textContent = "owie";
+    targetCell.textContent = attackResults;
   };
   return {
     initializeBoardDOM,
@@ -254,7 +254,7 @@ const DOMController = (() => {
     rotateDraggedImage,
     getDraggedImage,
     dragOver,
-    addHitShotDOM,
+    addAttackResultDOM,
   };
 })();
 
