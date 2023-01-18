@@ -27,6 +27,18 @@ const Player = (playerType) => {
   };
   const sendAttack = (coordinates) => {
     const opposingPlayerGameboard = opposingPlayer.getGameboard();
+    const receivedMissedShots = opposingPlayer
+      .getGameboard()
+      .getReceivedMissedShots();
+    const receivedHitShots = opposingPlayer
+      .getGameboard()
+      .getReceivedHitShots();
+    if (
+      checkIfPreviouslyAttacked(receivedMissedShots, coordinates) ||
+      checkIfPreviouslyAttacked(receivedHitShots, coordinates)
+    ) {
+      return;
+    }
     const attackResults = opposingPlayer.receiveAttack(coordinates);
     if (attackResults === "hit") {
       playerGameboard.addSentHitShot(coordinates);

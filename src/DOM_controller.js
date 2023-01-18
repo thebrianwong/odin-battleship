@@ -269,6 +269,7 @@ const DOMController = (() => {
     } else {
       attackResultsElement.setAttribute("src", "../dist/white_O.png");
     }
+    targetCell.disabled = true;
   };
   return {
     initializeBoardDOM,
