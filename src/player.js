@@ -31,7 +31,13 @@ const Player = (playerType) => {
     if (attackResults === "hit") {
       playerGameboard.addSentHitShot(coordinates);
       if (!isComputer()) {
-        DOMController.addHitShotDOM("opponent", coordinates);
+        DOMController.addAttackResultDOM(
+          "opponent",
+          attackResults,
+          coordinates
+        );
+      } else if (isComputer()) {
+        DOMController.addAttackResultDOM("player", attackResults, coordinates);
       }
       if (opposingPlayerGameboard.isAllShipsSunk()) {
         GameLoop.endGame(opposingPlayer);
@@ -42,6 +48,15 @@ const Player = (playerType) => {
     }
     if (opposingPlayer.isComputer()) {
       opposingPlayer.sendComputerAttack();
+      if (!isComputer()) {
+        DOMController.addAttackResultDOM(
+          "opponent",
+          attackResults,
+          coordinates
+        );
+      } else if (isComputer()) {
+        DOMController.addAttackResultDOM("player", attackResults, coordinates);
+      }
     }
   };
   const initializeComputerGameboard = () => {
