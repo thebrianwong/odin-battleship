@@ -1,7 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { Ship } from "../src/ship";
 import { Gameboard } from "../src/gameboard";
 import { Player } from "../src/player";
 import { GameLoop } from "../src/gameloop";
+import { DOMController } from "../src/DOM_controller";
 
 afterEach(() => {
   GameLoop.resetGame();
@@ -85,11 +90,32 @@ test("6) The Computer Player attacks after the Human Player attacks", () => {
     "sendComputerAttack"
   );
   const spyComputerReceiveAttack = jest.spyOn(computerPlayer, "receiveAttack");
+
+  // Set up DOM elements for computer
+  const computerGameboardDOM = document.createElement("div");
+  computerGameboardDOM.classList.add("opponent-board");
+  document.body.appendChild(computerGameboardDOM);
+  const targetCellComputer = document.createElement("div");
+  targetCellComputer.dataset.row = "0";
+  targetCellComputer.dataset.column = "0";
+  computerGameboardDOM.appendChild(targetCellComputer);
+
+  // Set up DOM elements for human
+  const humanGameboardDOM = document.createElement("div");
+  humanGameboardDOM.classList.add("player-board");
+  document.body.appendChild(humanGameboardDOM);
+  const targetCellHuman = document.createElement("div");
+  targetCellHuman.dataset.row = "0";
+  targetCellHuman.dataset.column = "0";
+  humanGameboardDOM.appendChild(targetCellHuman);
+
+  jest.spyOn(Math, "random").mockReturnValueOnce(0).mockReturnValueOnce(0);
   humanPlayer.sendAttack([0, 0]);
   expect(spyHumanSendAttack).toHaveBeenCalledTimes(1);
   expect(spyHumanReceiveAttack).toHaveBeenCalledTimes(1);
   expect(spyComputerSendComputerAttack).toHaveBeenCalledTimes(1);
   expect(spyComputerReceiveAttack).toHaveBeenCalledTimes(1);
+  document.body.innerHTML = "";
 });
 
 test("7) The game ends after a Player loses all their Ships", () => {
@@ -105,10 +131,38 @@ test("7) The game ends after a Player loses all their Ships", () => {
     [0, 0],
     [0, 1],
   ]);
+
+  // Set up DOM elements for computer
+  const computerGameboardDOM = document.createElement("div");
+  computerGameboardDOM.classList.add("opponent-board");
+  document.body.appendChild(computerGameboardDOM);
+  const targetCellComputer1 = document.createElement("div");
+  targetCellComputer1.dataset.row = "6";
+  targetCellComputer1.dataset.column = "6";
+  computerGameboardDOM.appendChild(targetCellComputer1);
+  const targetCellComputer2 = document.createElement("div");
+  targetCellComputer2.dataset.row = "6";
+  targetCellComputer2.dataset.column = "7";
+  computerGameboardDOM.appendChild(targetCellComputer2);
+
+  // Set up DOM elements for human
+  const humanGameboardDOM = document.createElement("div");
+  humanGameboardDOM.classList.add("player-board");
+  document.body.appendChild(humanGameboardDOM);
+  const targetCellHuman1 = document.createElement("div");
+  targetCellHuman1.dataset.row = "0";
+  targetCellHuman1.dataset.column = "0";
+  humanGameboardDOM.appendChild(targetCellHuman1);
+  const targetCellHuman2 = document.createElement("div");
+  targetCellHuman2.dataset.row = "0";
+  targetCellHuman2.dataset.column = "1";
+  humanGameboardDOM.appendChild(targetCellHuman2);
+
   humanPlayer.sendAttack([6, 6]);
   humanPlayer.sendAttack([6, 7]);
   expect(humanPlayer.getGameboard().isAllShipsSunk()).toBeTruthy();
   expect(GameLoop.isInProgress()).toBeFalsy();
+  document.body.innerHTML = "";
 });
 
 test("8) The game know which Player won after the game ends", () => {
@@ -125,9 +179,37 @@ test("8) The game know which Player won after the game ends", () => {
     [0, 0],
     [0, 1],
   ]);
+
+  // Set up DOM elements for computer
+  const computerGameboardDOM = document.createElement("div");
+  computerGameboardDOM.classList.add("opponent-board");
+  document.body.appendChild(computerGameboardDOM);
+  const targetCellComputer1 = document.createElement("div");
+  targetCellComputer1.dataset.row = "6";
+  targetCellComputer1.dataset.column = "6";
+  computerGameboardDOM.appendChild(targetCellComputer1);
+  const targetCellComputer2 = document.createElement("div");
+  targetCellComputer2.dataset.row = "6";
+  targetCellComputer2.dataset.column = "7";
+  computerGameboardDOM.appendChild(targetCellComputer2);
+
+  // Set up DOM elements for human
+  const humanGameboardDOM = document.createElement("div");
+  humanGameboardDOM.classList.add("player-board");
+  document.body.appendChild(humanGameboardDOM);
+  const targetCellHuman1 = document.createElement("div");
+  targetCellHuman1.dataset.row = "0";
+  targetCellHuman1.dataset.column = "0";
+  humanGameboardDOM.appendChild(targetCellHuman1);
+  const targetCellHuman2 = document.createElement("div");
+  targetCellHuman2.dataset.row = "0";
+  targetCellHuman2.dataset.column = "1";
+  humanGameboardDOM.appendChild(targetCellHuman2);
+
   humanPlayer.sendAttack([6, 6]);
   humanPlayer.sendAttack([6, 7]);
   expect(GameLoop.getWinner()).toStrictEqual(computerPlayer);
+  document.body.innerHTML = "";
 });
 
 test("9) The game can reset itself after it ends and the player wants to play again", () => {
@@ -143,6 +225,33 @@ test("9) The game can reset itself after it ends and the player wants to play ag
     [0, 0],
     [0, 1],
   ]);
+
+  // Set up DOM elements for computer
+  const computerGameboardDOM = document.createElement("div");
+  computerGameboardDOM.classList.add("opponent-board");
+  document.body.appendChild(computerGameboardDOM);
+  const targetCellComputer1 = document.createElement("div");
+  targetCellComputer1.dataset.row = "6";
+  targetCellComputer1.dataset.column = "6";
+  computerGameboardDOM.appendChild(targetCellComputer1);
+  const targetCellComputer2 = document.createElement("div");
+  targetCellComputer2.dataset.row = "6";
+  targetCellComputer2.dataset.column = "7";
+  computerGameboardDOM.appendChild(targetCellComputer2);
+
+  // Set up DOM elements for human
+  const humanGameboardDOM = document.createElement("div");
+  humanGameboardDOM.classList.add("player-board");
+  document.body.appendChild(humanGameboardDOM);
+  const targetCellHuman1 = document.createElement("div");
+  targetCellHuman1.dataset.row = "0";
+  targetCellHuman1.dataset.column = "0";
+  humanGameboardDOM.appendChild(targetCellHuman1);
+  const targetCellHuman2 = document.createElement("div");
+  targetCellHuman2.dataset.row = "0";
+  targetCellHuman2.dataset.column = "1";
+  humanGameboardDOM.appendChild(targetCellHuman2);
+
   humanPlayer.sendAttack([6, 6]);
   humanPlayer.sendAttack([6, 7]);
   expect(GameLoop.getPlayers().length).toBeGreaterThan(0);
@@ -152,4 +261,5 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   expect(GameLoop.getPlayers().length).toBe(0);
   expect(GameLoop.isInProgress()).toBeTruthy();
   expect(GameLoop.getWinner()).toBeUndefined();
+  document.body.innerHTML = "";
 });
