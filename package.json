@@ -28,5 +28,8 @@
     "url": "https://github.com/thebrianwong/odin-battleship/issues"
   },
   "homepage": "https://github.com/thebrianwong/odin-battleship#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "jest-environment-jsdom": "^29.3.1"
+  }
 }
