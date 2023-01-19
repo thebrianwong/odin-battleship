@@ -116,6 +116,7 @@ test("6) The Computer Player attacks after the Human Player attacks", () => {
   expect(spyComputerSendComputerAttack).toHaveBeenCalledTimes(1);
   expect(spyComputerReceiveAttack).toHaveBeenCalledTimes(1);
   document.body.innerHTML = "";
+  jest.spyOn(global.Math, "random").mockRestore();
 });
 
 test("7) The game ends after a Player loses all their Ships", () => {
@@ -163,6 +164,7 @@ test("7) The game ends after a Player loses all their Ships", () => {
   expect(humanPlayer.getGameboard().isAllShipsSunk()).toBeTruthy();
   expect(GameLoop.isInProgress()).toBeFalsy();
   document.body.innerHTML = "";
+  jest.spyOn(global.Math, "random").mockRestore();
 });
 
 test("8) The game know which Player won after the game ends", () => {
@@ -210,6 +212,7 @@ test("8) The game know which Player won after the game ends", () => {
   humanPlayer.sendAttack([6, 7]);
   expect(GameLoop.getWinner()).toStrictEqual(computerPlayer);
   document.body.innerHTML = "";
+  jest.spyOn(global.Math, "random").mockRestore();
 });
 
 test("9) The game can reset itself after it ends and the player wants to play again", () => {
@@ -262,4 +265,5 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   expect(GameLoop.isInProgress()).toBeTruthy();
   expect(GameLoop.getWinner()).toBeUndefined();
   document.body.innerHTML = "";
+  jest.spyOn(global.Math, "random").mockRestore();
 });
