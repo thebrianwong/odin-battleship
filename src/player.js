@@ -26,19 +26,10 @@ const Player = (playerType) => {
     playerGameboard.placeShip(ship, coordinates);
   };
   const sendAttack = (coordinates) => {
-    const opposingPlayerGameboard = opposingPlayer.getGameboard();
-    const receivedMissedShots = opposingPlayer
-      .getGameboard()
-      .getReceivedMissedShots();
-    const receivedHitShots = opposingPlayer
-      .getGameboard()
-      .getReceivedHitShots();
-    if (
-      checkIfPreviouslyAttacked(/* receivedMissedShots,  */ coordinates) ||
-      checkIfPreviouslyAttacked(/* receivedHitShots,  */ coordinates)
-    ) {
+    if (checkIfPreviouslyAttacked(coordinates)) {
       return;
     }
+    const opposingPlayerGameboard = opposingPlayer.getGameboard();
     const attackResults = opposingPlayer.receiveAttack(coordinates);
     if (attackResults === "hit") {
       playerGameboard.addSentHitShot(coordinates);
@@ -168,51 +159,32 @@ const Player = (playerType) => {
     const BOARDAXESLENGTH = 10;
     return Math.floor(Math.random() * BOARDAXESLENGTH);
   };
-  const checkIfPreviouslyAttacked = (
-    /* opposingPlayerReceivedShots, */
-    // opposingPlayer,
-    attackCoordinates
-  ) =>
-    // opposingPlayerReceivedShots.some(
-    //   (receivedShot) =>
-    //     receivedShot[0] === attackCoordinates[0] &&
-    //     receivedShot[1] === attackCoordinates[1]
-    // );
-    {
-      let previouslyAttacked = false;
-      const receivedMissedShots = opposingPlayer
-        .getGameboard()
-        .getReceivedMissedShots();
-      const receivedHitShots = opposingPlayer
-        .getGameboard()
-        .getReceivedHitShots();
-      previouslyAttacked = receivedMissedShots.some(
-        (shot) =>
-          shot[0] === attackCoordinates[0] && shot[1] === attackCoordinates[1]
-      );
-      if (!previouslyAttacked) {
-        previouslyAttacked = receivedHitShots.some(
-          (shot) =>
-            shot[0] === attackCoordinates[0] && shot[1] === attackCoordinates[1]
-        );
-      }
-      return previouslyAttacked;
-    };
-  const generateAttackCoordinates = () => {
+  const checkIfPreviouslyAttacked = (attackCoordinates) => {
+    let previouslyAttacked = false;
     const receivedMissedShots = opposingPlayer
       .getGameboard()
       .getReceivedMissedShots();
     const receivedHitShots = opposingPlayer
       .getGameboard()
       .getReceivedHitShots();
+    previouslyAttacked = receivedMissedShots.some(
+      (shot) =>
+        shot[0] === attackCoordinates[0] && shot[1] === attackCoordinates[1]
+    );
+    if (!previouslyAttacked) {
+      previouslyAttacked = receivedHitShots.some(
+        (shot) =>
+          shot[0] === attackCoordinates[0] && shot[1] === attackCoordinates[1]
+      );
+    }
+    return previouslyAttacked;
+  };
+  const generateAttackCoordinates = () => {
     const attackCoordinates = [undefined, undefined];
     do {
       attackCoordinates[0] = generateRandomCoordinate();
       attackCoordinates[1] = generateRandomCoordinate();
-    } while (
-      checkIfPreviouslyAttacked(/* receivedMissedShots, */ attackCoordinates) ||
-      checkIfPreviouslyAttacked(/* receivedHitShots,  */ attackCoordinates)
-    );
+    } while (checkIfPreviouslyAttacked(attackCoordinates));
     return attackCoordinates;
   };
   const checkIfValidEmptyCoordinates = (
