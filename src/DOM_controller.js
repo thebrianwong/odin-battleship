@@ -49,7 +49,7 @@ const DOMController = (() => {
                 GameLoop.getPlayers()[0].getGameboard().getPlacedShips()
                   .length === 5
               ) {
-                enableComputerGameboard();
+                toggleAbilityToAttack("enable");
               }
             });
             gameboardDOM.appendChild(cellElement);
@@ -75,14 +75,20 @@ const DOMController = (() => {
       }
     }
   };
-  const enableComputerGameboard = () => {
+  const toggleAbilityToAttack = (action) => {
     const computerGameboardElement = document.querySelector(".opponent-board");
     const cellElements = Array.from(
       computerGameboardElement.querySelectorAll(".gameboard-cell")
     );
-    cellElements.forEach((cellElement) => {
-      cellElement.disabled = false;
-    });
+    if (action === "enable") {
+      cellElements.forEach((cellElement) => {
+        cellElement.disabled = false;
+      });
+    } else if (action === "disable") {
+      cellElements.forEach((cellElement) => {
+        cellElement.disabled = true;
+      });
+    }
   };
   const getDraggedImage = (event) => {
     const dataObject = {
@@ -279,6 +285,7 @@ const DOMController = (() => {
     getDraggedImage,
     dragOver,
     addAttackResultDOM,
+    toggleAbilityToAttack,
   };
 })();
 
