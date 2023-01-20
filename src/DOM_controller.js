@@ -54,7 +54,6 @@ const DOMController = (() => {
           computerCellElement.disabled = true;
           computerCellElement.addEventListener("click", () => {
             if (!GameLoop.isMidAttack()) {
-              console.log(computerCellElement);
               const cellRow = Number(computerCellElement.dataset.row);
               const cellColumn = Number(computerCellElement.dataset.column);
               humanPlayerObject.sendAttack([cellRow, cellColumn]);
@@ -93,7 +92,6 @@ const DOMController = (() => {
     } else if (Array.from(event.target.classList).includes("vertical")) {
       dataObject.vertical = true;
     }
-    console.log(dataObject);
     const dataString = JSON.stringify(dataObject);
     event.dataTransfer.setData("image", dataString);
   };
@@ -120,10 +118,8 @@ const DOMController = (() => {
           "right"
         )
       ) {
-        console.log("fits");
         return true;
       }
-      console.log("nope");
       return false;
     }
     if (dataObject.vertical) {
@@ -134,10 +130,8 @@ const DOMController = (() => {
           "down"
         )
       ) {
-        console.log("fits");
         return true;
       }
-      console.log("nope");
       return false;
     }
   };
@@ -253,7 +247,6 @@ const DOMController = (() => {
   const addAttackResultDOM = (playerType, attackResults, coordinates) => {
     const cellRow = coordinates[0];
     const cellColumn = coordinates[1];
-    console.log(playerType);
     const gameboardDOM = document.querySelector(`.${playerType}-board`);
     const targetCell = gameboardDOM.querySelector(
       `[data-row='${cellRow}'][data-column='${cellColumn}']`
