@@ -4,10 +4,10 @@ const EventListenerController = (() => {
   const rotateShipImageListeners = () => {
     const shipPlacementElements = document.querySelectorAll(".ship-placement");
     shipPlacementElements.forEach((groupOfElements) => {
-      const image = groupOfElements.querySelector("img");
-      const button = groupOfElements.querySelector("button");
-      button.addEventListener("click", () => {
-        DOMController.rotateShipImage(image);
+      const imageElement = groupOfElements.querySelector("img");
+      const buttonElement = groupOfElements.querySelector("button");
+      buttonElement.addEventListener("click", () => {
+        DOMController.rotateShipImage(imageElement);
       });
     });
   };
