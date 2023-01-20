@@ -3,11 +3,12 @@ import { DOMController } from "./DOM_controller";
 const EventListenerController = (() => {
   const rotateShipImageListeners = () => {
     const shipPlacementElements = document.querySelectorAll(".ship-placement");
-    shipPlacementElements.forEach((group) => {
-      const img = group.children[0];
-      const btn = group.children[2];
-      btn.addEventListener("click", () => {
-        DOMController.rotateShipImage(img);
+    shipPlacementElements.forEach((groupOfElements) => {
+      const image = groupOfElements.querySelector("img");
+      const button = groupOfElements.querySelector("button");
+      console.log(image, button);
+      button.addEventListener("click", () => {
+        DOMController.rotateShipImage(image);
       });
     });
   };
