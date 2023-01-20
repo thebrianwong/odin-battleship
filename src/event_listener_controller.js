@@ -6,7 +6,6 @@ const EventListenerController = (() => {
     shipPlacementElements.forEach((groupOfElements) => {
       const image = groupOfElements.querySelector("img");
       const button = groupOfElements.querySelector("button");
-      console.log(image, button);
       button.addEventListener("click", () => {
         DOMController.rotateShipImage(image);
       });
