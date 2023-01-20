@@ -26,7 +26,11 @@ const Player = (playerType) => {
     playerGameboard.placeShip(ship, coordinates);
   };
   const sendAttack = (coordinates) => {
-    if (checkIfPreviouslyAttacked(coordinates) || !GameLoop.isInProgress()) {
+    if (
+      checkIfPreviouslyAttacked(coordinates) ||
+      !GameLoop.isInProgress() ||
+      GameLoop.isMidAttack()
+    ) {
       return;
     }
     const opposingPlayerGameboard = opposingPlayer.getGameboard();
@@ -59,7 +63,11 @@ const Player = (playerType) => {
       }
     }
     if (opposingPlayer.isComputer()) {
-      opposingPlayer.sendComputerAttack();
+      GameLoop.toggleMidAttack(true);
+      setTimeout(() => {
+        GameLoop.toggleMidAttack(false);
+        opposingPlayer.sendComputerAttack();
+      }, 1000);
     }
   };
   const initializeComputerGameboard = () => {
