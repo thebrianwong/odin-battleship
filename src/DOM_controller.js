@@ -5,6 +5,7 @@ const DOMController = (() => {
     const BOARDAXESLENGTH = 10;
     const columnLabels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
     const rowLabels = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+    const humanPlayerObject = GameLoop.getPlayers()[0];
     for (let i = -1; i < BOARDAXESLENGTH; i++) {
       for (let j = -1; j < BOARDAXESLENGTH; j++) {
         if (i === -1) {
@@ -27,40 +28,39 @@ const DOMController = (() => {
         } else if (
           Array.from(gameboardDOM.classList).includes("player-board")
         ) {
-          const cellElement = document.createElement("div");
-          cellElement.setAttribute("data-row", i);
-          cellElement.setAttribute("data-column", j);
-          cellElement.classList.add("gameboard-cell");
-          cellElement.addEventListener("dragover", (event) => {
+          const playerCellElement = document.createElement("div");
+          playerCellElement.setAttribute("data-row", i);
+          playerCellElement.setAttribute("data-column", j);
+          playerCellElement.classList.add("gameboard-cell");
+          playerCellElement.addEventListener("dragover", (event) => {
             dragOver(event);
           });
-          cellElement.addEventListener("drop", (event) => {
+          playerCellElement.addEventListener("drop", (event) => {
             insertDraggedImage(event);
             if (
-              GameLoop.getPlayers()[0].getGameboard().getPlacedShips()
-                .length === 5
+              humanPlayerObject.getGameboard().getPlacedShips().length === 5
             ) {
               toggleAbilityToAttack("enable");
             }
           });
-          gameboardDOM.appendChild(cellElement);
+          gameboardDOM.appendChild(playerCellElement);
         } else if (
           Array.from(gameboardDOM.classList).includes("opponent-board")
         ) {
-          const cellElement = document.createElement("button");
-          cellElement.setAttribute("data-row", i);
-          cellElement.setAttribute("data-column", j);
-          cellElement.classList.add("gameboard-cell");
-          cellElement.disabled = true;
-          cellElement.addEventListener("click", (event) => {
+          const computerCellElement = document.createElement("button");
+          computerCellElement.setAttribute("data-row", i);
+          computerCellElement.setAttribute("data-column", j);
+          computerCellElement.classList.add("gameboard-cell");
+          computerCellElement.disabled = true;
+          computerCellElement.addEventListener("click", () => {
             if (!GameLoop.isMidAttack()) {
-              console.log(cellElement);
-              const cellRow = Number(cellElement.dataset.row);
-              const cellColumn = Number(cellElement.dataset.column);
-              GameLoop.getPlayers()[0].sendAttack([cellRow, cellColumn]);
+              console.log(computerCellElement);
+              const cellRow = Number(computerCellElement.dataset.row);
+              const cellColumn = Number(computerCellElement.dataset.column);
+              humanPlayerObject.sendAttack([cellRow, cellColumn]);
             }
           });
-          gameboardDOM.appendChild(cellElement);
+          gameboardDOM.appendChild(computerCellElement);
         }
       }
     }
@@ -97,14 +97,14 @@ const DOMController = (() => {
     const dataString = JSON.stringify(dataObject);
     event.dataTransfer.setData("image", dataString);
   };
-  const dragOver = () => {
+  const dragOver = (event) => {
     event.preventDefault();
   };
   const initializeBoardDOM = () => {
     const humanPlayerGameboardDOM = document.querySelector(".player-board");
-    const opponentGameboardDOM = document.querySelector(".opponent-board");
+    const computerGameboardDOM = document.querySelector(".opponent-board");
     createBoardCells(humanPlayerGameboardDOM);
-    createBoardCells(opponentGameboardDOM);
+    createBoardCells(computerGameboardDOM);
   };
   const isValidGameboardCell = (targetCell, dataObject) => {
     const cellCoordinates = [
@@ -191,6 +191,7 @@ const DOMController = (() => {
   };
   const insertDraggedImage = (event) => {
     event.preventDefault();
+    const humanPlayerObject = GameLoop.getPlayers()[0];
     const targetCell = event.target;
     if (Array.from(targetCell.classList).includes("contains-ship-image")) {
       return;
@@ -202,7 +203,7 @@ const DOMController = (() => {
       return;
     }
     const shipCoordinates = addShipToDOM(targetCell, dataObject);
-    GameLoop.getPlayers()[0].addShipToGameboard(
+    humanPlayerObject.addShipToGameboard(
       Number(dataObject.shipLength),
       shipCoordinates
     );
