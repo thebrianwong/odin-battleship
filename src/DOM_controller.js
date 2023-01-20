@@ -24,55 +24,43 @@ const DOMController = (() => {
           rowLabelElement.classList.add("row-label");
           rowLabelElement.textContent = rowLabels[i];
           gameboardDOM.appendChild(rowLabelElement);
-        } else {
-          // const cellElement = document.createElement("div");
-          // cellElement.setAttribute("data-row", i);
-          // cellElement.setAttribute("data-column", j);
-          // cellElement.classList.add("gameboard-cell");
-          // cellElement.addEventListener("dragover", (event) => {
-          //   dragOver(event);
-          // });
-          // cellElement.addEventListener("drop", (event) => {
-          //   insertDraggedImage(event);
-          // });
-          if (Array.from(gameboardDOM.classList).includes("player-board")) {
-            const cellElement = document.createElement("div");
-            cellElement.setAttribute("data-row", i);
-            cellElement.setAttribute("data-column", j);
-            cellElement.classList.add("gameboard-cell");
-            cellElement.addEventListener("dragover", (event) => {
-              dragOver(event);
-            });
-            cellElement.addEventListener("drop", (event) => {
-              insertDraggedImage(event);
-              if (
-                GameLoop.getPlayers()[0].getGameboard().getPlacedShips()
-                  .length === 5
-              ) {
-                toggleAbilityToAttack("enable");
-              }
-            });
-            gameboardDOM.appendChild(cellElement);
-          } else if (
-            Array.from(gameboardDOM.classList).includes("opponent-board")
-          ) {
-            const cellElement = document.createElement("button");
-            cellElement.setAttribute("data-row", i);
-            cellElement.setAttribute("data-column", j);
-            cellElement.classList.add("gameboard-cell");
-            cellElement.disabled = true;
-            cellElement.addEventListener("click", (event) => {
-              if (!GameLoop.isMidAttack()) {
-                console.log(cellElement);
-                const cellRow = Number(cellElement.dataset.row);
-                const cellColumn = Number(cellElement.dataset.column);
-                GameLoop.getPlayers()[0].sendAttack([cellRow, cellColumn]);
-              }
-            });
-            gameboardDOM.appendChild(cellElement);
-          }
-          // some click event listener where attack is made OR prior to that, placing ship on that cell
-          // gameboardDOM.appendChild(cellElement);
+        } else if (
+          Array.from(gameboardDOM.classList).includes("player-board")
+        ) {
+          const cellElement = document.createElement("div");
+          cellElement.setAttribute("data-row", i);
+          cellElement.setAttribute("data-column", j);
+          cellElement.classList.add("gameboard-cell");
+          cellElement.addEventListener("dragover", (event) => {
+            dragOver(event);
+          });
+          cellElement.addEventListener("drop", (event) => {
+            insertDraggedImage(event);
+            if (
+              GameLoop.getPlayers()[0].getGameboard().getPlacedShips()
+                .length === 5
+            ) {
+              toggleAbilityToAttack("enable");
+            }
+          });
+          gameboardDOM.appendChild(cellElement);
+        } else if (
+          Array.from(gameboardDOM.classList).includes("opponent-board")
+        ) {
+          const cellElement = document.createElement("button");
+          cellElement.setAttribute("data-row", i);
+          cellElement.setAttribute("data-column", j);
+          cellElement.classList.add("gameboard-cell");
+          cellElement.disabled = true;
+          cellElement.addEventListener("click", (event) => {
+            if (!GameLoop.isMidAttack()) {
+              console.log(cellElement);
+              const cellRow = Number(cellElement.dataset.row);
+              const cellColumn = Number(cellElement.dataset.column);
+              GameLoop.getPlayers()[0].sendAttack([cellRow, cellColumn]);
+            }
+          });
+          gameboardDOM.appendChild(cellElement);
         }
       }
     }
