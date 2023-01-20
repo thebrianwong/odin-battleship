@@ -62,10 +62,12 @@ const DOMController = (() => {
             cellElement.classList.add("gameboard-cell");
             cellElement.disabled = true;
             cellElement.addEventListener("click", (event) => {
-              console.log(cellElement);
-              const cellRow = Number(cellElement.dataset.row);
-              const cellColumn = Number(cellElement.dataset.column);
-              GameLoop.getPlayers()[0].sendAttack([cellRow, cellColumn]);
+              if (!GameLoop.isMidAttack()) {
+                console.log(cellElement);
+                const cellRow = Number(cellElement.dataset.row);
+                const cellColumn = Number(cellElement.dataset.column);
+                GameLoop.getPlayers()[0].sendAttack([cellRow, cellColumn]);
+              }
             });
             gameboardDOM.appendChild(cellElement);
           }
