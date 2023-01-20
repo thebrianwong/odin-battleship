@@ -45,7 +45,7 @@ const DOMController = (() => {
           });
           gameboardDOM.appendChild(playerCellElement);
         } else if (
-          Array.from(gameboardDOM.classList).includes("opponent-board")
+          Array.from(gameboardDOM.classList).includes("computer-board")
         ) {
           const computerCellElement = document.createElement("button");
           computerCellElement.setAttribute("data-row", i);
@@ -65,7 +65,7 @@ const DOMController = (() => {
     }
   };
   const toggleAbilityToAttack = (action) => {
-    const computerGameboardElement = document.querySelector(".opponent-board");
+    const computerGameboardElement = document.querySelector(".computer-board");
     const cellElements = Array.from(
       computerGameboardElement.querySelectorAll(".gameboard-cell")
     );
@@ -100,7 +100,7 @@ const DOMController = (() => {
   };
   const initializeBoardDOM = () => {
     const humanPlayerGameboardDOM = document.querySelector(".player-board");
-    const computerGameboardDOM = document.querySelector(".opponent-board");
+    const computerGameboardDOM = document.querySelector(".computer-board");
     createBoardCells(humanPlayerGameboardDOM);
     createBoardCells(computerGameboardDOM);
   };

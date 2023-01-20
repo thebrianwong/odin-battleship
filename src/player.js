@@ -39,7 +39,7 @@ const Player = (playerType) => {
       playerGameboard.addSentHitShot(coordinates);
       if (!isComputer()) {
         DOMController.addAttackResultDOM(
-          "opponent",
+          "computer",
           attackResults,
           coordinates
         );
@@ -54,7 +54,7 @@ const Player = (playerType) => {
       playerGameboard.addSentMissedShot(coordinates);
       if (!isComputer()) {
         DOMController.addAttackResultDOM(
-          "opponent",
+          "computer",
           attackResults,
           coordinates
         );
