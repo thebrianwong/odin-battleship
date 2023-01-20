@@ -7,7 +7,7 @@ body {
   height: 100vh;
 }
 
-button:hover {
+button:hover:enabled {
   cursor: pointer;
 }
 
