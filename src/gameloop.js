@@ -7,12 +7,17 @@ const GameLoop = (() => {
   const players = [];
   let inProgress = true;
   let winner;
+  let midAttack = false;
   const getPlayers = () => players;
   const isInProgress = () => inProgress;
   const getWinner = () => winner;
   const setWinner = (loserPlayer) => {
     const winnerPlayer = loserPlayer.getOpposingPlayer();
     winner = winnerPlayer;
+  };
+  const isMidAttack = () => midAttack;
+  const toggleMidAttack = (state) => {
+    state ? (midAttack = true) : (midAttack = false);
   };
   const createGame = () => {
     const humanPlayer = Player("human");
@@ -37,6 +42,8 @@ const GameLoop = (() => {
     getPlayers,
     isInProgress,
     getWinner,
+    isMidAttack,
+    toggleMidAttack,
     createGame,
     endGame,
     resetGame,
