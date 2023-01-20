@@ -26,7 +26,7 @@ const Player = (playerType) => {
     playerGameboard.placeShip(ship, coordinates);
   };
   const sendAttack = (coordinates) => {
-    if (checkIfPreviouslyAttacked(coordinates)) {
+    if (checkIfPreviouslyAttacked(coordinates) || !GameLoop.isInProgress()) {
       return;
     }
     const opposingPlayerGameboard = opposingPlayer.getGameboard();
@@ -73,7 +73,7 @@ const Player = (playerType) => {
     }
   };
   const sendComputerAttack = () => {
-    if (!computerPlayer) {
+    if (!computerPlayer || !GameLoop.isInProgress()) {
       return;
     }
     const attackCoordinates = generateAttackCoordinates();
