@@ -5,6 +5,11 @@
 import { Ship } from "../src/ship";
 import { Gameboard } from "../src/gameboard";
 import { Player } from "../src/player";
+import { GameLoop } from "../src/gameloop";
+
+afterEach(() => {
+  GameLoop.resetGame();
+});
 
 test("1) Create a Player", () => {
   const player = Player("human");
