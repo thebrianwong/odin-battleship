@@ -19,7 +19,7 @@ button:hover:enabled {
   margin: 0 10px 0 auto;
 }
 
-.ship-container {
+.sidebar {
   display: flex;
   flex-direction: column;
   gap: 75px;
@@ -27,11 +27,11 @@ button:hover:enabled {
   width: 25%;
 }
 
-.ship-container div:nth-child(1) {
+.sidebar div:nth-child(1) {
   margin-top: auto;
 }
 
-.ship-container div:last-child {
+.sidebar div:last-child {
   margin-bottom: auto;
 }
 
