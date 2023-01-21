@@ -11,10 +11,6 @@ const GameLoop = (() => {
   const getPlayers = () => players;
   const isInProgress = () => inProgress;
   const getWinner = () => winner;
-  const setWinner = (loserPlayer) => {
-    const winnerPlayer = loserPlayer.getOpposingPlayer();
-    winner = winnerPlayer;
-  };
   const isMidAttack = () => midAttack;
   const toggleMidAttack = (state) => {
     state ? (midAttack = true) : (midAttack = false);
@@ -29,8 +25,9 @@ const GameLoop = (() => {
     computerPlayer.initializeComputerGameboard();
   };
   const endGame = (loserPlayer) => {
+    const winnerPlayer = loserPlayer.getOpposingPlayer();
     inProgress = false;
-    setWinner(loserPlayer);
+    winner = winnerPlayer;
     DOMController.toggleAbilityToAttack("disable");
   };
   const resetGame = () => {
