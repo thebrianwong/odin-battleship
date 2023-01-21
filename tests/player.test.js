@@ -62,7 +62,7 @@ test("6) Player 1 can hit Player 2's Ship", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer = document.createElement("div");
   targetCellComputer.dataset.row = "0";
@@ -100,7 +100,7 @@ test("7) Player 1 misses Player 2's Ship", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer = document.createElement("div");
   targetCellComputer.dataset.row = "0";
@@ -139,7 +139,7 @@ test("8) Player 1 sinks one of Player 2's Ships", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer1 = document.createElement("div");
   targetCellComputer1.dataset.row = "0";
@@ -184,7 +184,7 @@ test("9) Player 1 sinks all of Player 2's Ships", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer1 = document.createElement("div");
   targetCellComputer1.dataset.row = "0";

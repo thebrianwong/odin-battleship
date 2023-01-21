@@ -93,7 +93,7 @@ test("6) The Computer Player attacks after the Human Player attacks", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer = document.createElement("div");
   targetCellComputer.dataset.row = "0";
@@ -135,7 +135,7 @@ test("7) The game ends after a Player loses all their Ships", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer1 = document.createElement("div");
   targetCellComputer1.dataset.row = "6";
@@ -184,7 +184,7 @@ test("8) The game know which Player won after the game ends", () => {
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer1 = document.createElement("div");
   targetCellComputer1.dataset.row = "6";
@@ -231,7 +231,7 @@ test("9) The game can reset itself after it ends and the player wants to play ag
 
   // Set up DOM elements for computer
   const computerGameboardDOM = document.createElement("div");
-  computerGameboardDOM.classList.add("opponent-board");
+  computerGameboardDOM.classList.add("computer-board");
   document.body.appendChild(computerGameboardDOM);
   const targetCellComputer1 = document.createElement("div");
   targetCellComputer1.dataset.row = "6";
