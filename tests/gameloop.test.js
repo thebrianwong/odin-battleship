@@ -110,13 +110,16 @@ test("6) The Computer Player attacks after the Human Player attacks", () => {
   humanGameboardDOM.appendChild(targetCellHuman);
 
   jest.spyOn(Math, "random").mockReturnValueOnce(0).mockReturnValueOnce(0);
+  jest.useFakeTimers();
   humanPlayer.sendAttack([0, 0]);
+  jest.advanceTimersByTime(1000);
   expect(spyHumanSendAttack).toHaveBeenCalledTimes(1);
   expect(spyHumanReceiveAttack).toHaveBeenCalledTimes(1);
   expect(spyComputerSendComputerAttack).toHaveBeenCalledTimes(1);
   expect(spyComputerReceiveAttack).toHaveBeenCalledTimes(1);
   document.body.innerHTML = "";
   jest.spyOn(global.Math, "random").mockRestore();
+  jest.useRealTimers();
 });
 
 test("7) The game ends after a Player loses all their Ships", () => {
@@ -159,12 +162,16 @@ test("7) The game ends after a Player loses all their Ships", () => {
   targetCellHuman2.dataset.column = "1";
   humanGameboardDOM.appendChild(targetCellHuman2);
 
+  jest.useFakeTimers();
   humanPlayer.sendAttack([6, 6]);
+  jest.advanceTimersByTime(1000);
   humanPlayer.sendAttack([6, 7]);
+  jest.advanceTimersByTime(1000);
   expect(humanPlayer.getGameboard().isAllShipsSunk()).toBeTruthy();
   expect(GameLoop.isInProgress()).toBeFalsy();
   document.body.innerHTML = "";
   jest.spyOn(global.Math, "random").mockRestore();
+  jest.useRealTimers();
 });
 
 test("8) The game know which Player won after the game ends", () => {
@@ -208,11 +215,15 @@ test("8) The game know which Player won after the game ends", () => {
   targetCellHuman2.dataset.column = "1";
   humanGameboardDOM.appendChild(targetCellHuman2);
 
+  jest.useFakeTimers();
   humanPlayer.sendAttack([6, 6]);
+  jest.advanceTimersByTime(1000);
   humanPlayer.sendAttack([6, 7]);
+  jest.advanceTimersByTime(1000);
   expect(GameLoop.getWinner()).toStrictEqual(computerPlayer);
   document.body.innerHTML = "";
   jest.spyOn(global.Math, "random").mockRestore();
+  jest.useRealTimers();
 });
 
 test("9) The game can reset itself after it ends and the player wants to play again", () => {
@@ -255,8 +266,11 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   targetCellHuman2.dataset.column = "1";
   humanGameboardDOM.appendChild(targetCellHuman2);
 
+  jest.useFakeTimers();
   humanPlayer.sendAttack([6, 6]);
+  jest.advanceTimersByTime(1000);
   humanPlayer.sendAttack([6, 7]);
+  jest.advanceTimersByTime(1000);
   expect(GameLoop.getPlayers().length).toBeGreaterThan(0);
   expect(GameLoop.isInProgress()).toBeFalsy();
   expect(GameLoop.getWinner()).toBeDefined();
@@ -266,4 +280,5 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   expect(GameLoop.getWinner()).toBeUndefined();
   document.body.innerHTML = "";
   jest.spyOn(global.Math, "random").mockRestore();
+  jest.useRealTimers();
 });
