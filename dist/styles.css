@@ -35,6 +35,10 @@ button:hover:enabled {
   margin-bottom: auto;
 }
 
+.default-hidden {
+  visibility: hidden;
+}
+
 .ship-placement {
   display: flex;
   justify-content: space-between;
