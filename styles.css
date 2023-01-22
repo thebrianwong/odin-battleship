@@ -191,6 +191,7 @@ button:hover:enabled {
 .ship-image-2-2 {
   background-position: -33px;
 }
+
 img {
   width: 100px;
   height: fit-content;
@@ -207,7 +208,7 @@ img {
 .temp-rotate {
   position: absolute;
   top: 0;
-  left: -100px;
+  left: -200px;
 }
 
 .temp-rotate-horizontal {
