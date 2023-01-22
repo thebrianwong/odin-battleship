@@ -261,6 +261,17 @@ const DOMController = (() => {
     }
     targetCell.disabled = true;
   };
+  const displayWinner = (winningPlayer) => {
+    const playerType = winningPlayer.isComputer();
+    const gameResultsElement = document.querySelector(".game-results");
+    gameResultsElement.classList.remove("default-hidden");
+    const displayWinnerElement = document.querySelector(".display-winner");
+    if (!playerType) {
+      displayWinnerElement.textContent = "Congratulations, you won!";
+    } else {
+      displayWinnerElement.textContent = "Oh no, you lost! Try again!";
+    }
+  };
   return {
     initializeBoardDOM,
     insertDraggedImage,
@@ -270,6 +281,7 @@ const DOMController = (() => {
     dragOver,
     addAttackResultDOM,
     toggleAbilityToAttack,
+    displayWinner,
   };
 })();
 
