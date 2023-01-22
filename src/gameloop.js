@@ -29,6 +29,7 @@ const GameLoop = (() => {
     inProgress = false;
     winner = winnerPlayer;
     DOMController.toggleAbilityToAttack("disable");
+    DOMController.displayWinner(winner);
   };
   const resetGame = () => {
     players.length = 0;
