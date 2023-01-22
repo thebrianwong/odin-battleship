@@ -31,10 +31,16 @@ const GameLoop = (() => {
     DOMController.toggleAbilityToAttack("disable");
     DOMController.displayWinner(winner);
   };
-  const resetGame = () => {
+  const resetGameLoopState = () => {
     players.length = 0;
     inProgress = true;
     winner = undefined;
+  };
+  const resetGame = () => {
+    resetGameLoopState();
+    DOMController.resetDOM();
+    createGame();
+    DOMController.initializeBoardDOM();
   };
   return {
     getPlayers,
