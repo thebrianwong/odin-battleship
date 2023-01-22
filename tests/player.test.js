@@ -170,6 +170,7 @@ test("9) Player 1 sinks all of Player 2's Ships", () => {
   const player1 = Player("human");
   const player2 = Player("human");
   player1.setOpposingPlayer(player2);
+  player2.setOpposingPlayer(player1);
   player1.addShipToGameboard(2, [
     [0, 0],
     [0, 1],
@@ -207,6 +208,15 @@ test("9) Player 1 sinks all of Player 2's Ships", () => {
   targetCellComputer4.dataset.row = "0";
   targetCellComputer4.dataset.column = "3";
   computerGameboardDOM.appendChild(targetCellComputer4);
+
+  // Set up DOM elements for game results
+  const gameResultsElement = document.createElement("div");
+  gameResultsElement.classList.add("game-results");
+  gameResultsElement.classList.add("default-hidden");
+  document.body.appendChild(gameResultsElement);
+  const displayWinner = document.createElement("p");
+  displayWinner.classList.add("display-winner");
+  gameResultsElement.appendChild(displayWinner);
 
   player1.sendAttack([0, 0]);
   player1.sendAttack([0, 1]);

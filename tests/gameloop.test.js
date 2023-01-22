@@ -162,6 +162,15 @@ test("7) The game ends after a Player loses all their Ships", () => {
   targetCellHuman2.dataset.column = "1";
   humanGameboardDOM.appendChild(targetCellHuman2);
 
+  // Set up DOM elements for game results
+  const gameResultsElement = document.createElement("div");
+  gameResultsElement.classList.add("game-results");
+  gameResultsElement.classList.add("default-hidden");
+  document.body.appendChild(gameResultsElement);
+  const displayWinner = document.createElement("p");
+  displayWinner.classList.add("display-winner");
+  gameResultsElement.appendChild(displayWinner);
+
   jest.useFakeTimers();
   humanPlayer.sendAttack([6, 6]);
   jest.advanceTimersByTime(1000);
@@ -215,6 +224,15 @@ test("8) The game know which Player won after the game ends", () => {
   targetCellHuman2.dataset.column = "1";
   humanGameboardDOM.appendChild(targetCellHuman2);
 
+  // Set up DOM elements for game results
+  const gameResultsElement = document.createElement("div");
+  gameResultsElement.classList.add("game-results");
+  gameResultsElement.classList.add("default-hidden");
+  document.body.appendChild(gameResultsElement);
+  const displayWinner = document.createElement("p");
+  displayWinner.classList.add("display-winner");
+  gameResultsElement.appendChild(displayWinner);
+
   jest.useFakeTimers();
   humanPlayer.sendAttack([6, 6]);
   jest.advanceTimersByTime(1000);
@@ -265,6 +283,15 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   targetCellHuman2.dataset.row = "0";
   targetCellHuman2.dataset.column = "1";
   humanGameboardDOM.appendChild(targetCellHuman2);
+
+  // Set up DOM elements for game results
+  const gameResultsElement = document.createElement("div");
+  gameResultsElement.classList.add("game-results");
+  gameResultsElement.classList.add("default-hidden");
+  document.body.appendChild(gameResultsElement);
+  const displayWinner = document.createElement("p");
+  displayWinner.classList.add("display-winner");
+  gameResultsElement.appendChild(displayWinner);
 
   jest.useFakeTimers();
   humanPlayer.sendAttack([6, 6]);
