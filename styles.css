@@ -39,7 +39,7 @@ button:hover:enabled {
   visibility: hidden;
 }
 
-.results-screen {
+.game-results {
   display: flex;
   flex-direction: column;
   align-items: center;
