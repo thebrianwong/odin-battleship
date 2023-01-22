@@ -9,3 +9,5 @@ DOMController.initializeBoardDOM();
 EventListenerController.rotateShipImageListeners();
 
 EventListenerController.addShipPlacementDrag();
+
+EventListenerController.addPlayAgainListener();

@@ -1,4 +1,5 @@
 import { DOMController } from "./DOM_controller";
+import { GameLoop } from "./gameloop";
 
 const EventListenerController = (() => {
   const rotateShipImageListeners = () => {
@@ -20,9 +21,16 @@ const EventListenerController = (() => {
       });
     });
   };
+  const addPlayAgainListener = () => {
+    const playAgainButton = document.querySelector(".play-again");
+    playAgainButton.addEventListener("click", () => {
+      GameLoop.resetGame();
+    });
+  };
   return {
     rotateShipImageListeners,
     addShipPlacementDrag,
+    addPlayAgainListener,
   };
 })();
 
