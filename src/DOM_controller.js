@@ -272,6 +272,46 @@ const DOMController = (() => {
       displayWinnerElement.textContent = "Oh no, you lost! Try again!";
     }
   };
+  const resetGameboards = () => {
+    const playerGameboard = document.querySelector(".player-board");
+    playerGameboard.innerHTML = "";
+    const computerGameboard = document.querySelector(".computer-board");
+    computerGameboard.innerHTML = "";
+  };
+  const resetShipImages = () => {
+    const shipPieceImages = Array.from(
+      document.querySelectorAll(".ship-piece")
+    );
+    shipPieceImages.forEach((image) => {
+      image.setAttribute("draggable", true);
+      image.classList.remove("disabled-image");
+      if (Array.from(image.classList).includes("vertical")) {
+        image.classList.remove("vertical");
+        image.classList.add("horizontal");
+      }
+    });
+  };
+  const resetRotateShipButtons = () => {
+    const rotateShipButtons = Array.from(
+      document.querySelectorAll(".rotate-ship")
+    );
+    rotateShipButtons.forEach((button) => {
+      button.disabled = false;
+    });
+  };
+  const resetGameResults = () => {
+    const gameResultsElement = document.querySelector(".game-results");
+    gameResultsElement.classList.add("default-hidden");
+    const displayWinnerElement =
+      gameResultsElement.querySelector(".display-winner");
+    displayWinnerElement.textContent = "Placeholder";
+  };
+  const resetDOM = () => {
+    resetGameboards();
+    resetShipImages();
+    resetRotateShipButtons();
+    resetGameResults();
+  };
   return {
     initializeBoardDOM,
     insertDraggedImage,
@@ -282,6 +322,7 @@ const DOMController = (() => {
     addAttackResultDOM,
     toggleAbilityToAttack,
     displayWinner,
+    resetDOM,
   };
 })();
 
