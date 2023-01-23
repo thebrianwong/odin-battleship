@@ -2,11 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { Ship } from "../src/ship";
-import { Gameboard } from "../src/gameboard";
-import { Player } from "../src/player";
 import { GameLoop } from "../src/gameloop";
-import { DOMController } from "../src/DOM_controller";
 
 afterEach(() => {
   GameLoop.resetGameLoopState();

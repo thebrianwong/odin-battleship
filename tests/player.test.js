@@ -2,8 +2,6 @@
  * @jest-environment jsdom
  */
 
-import { Ship } from "../src/ship";
-import { Gameboard } from "../src/gameboard";
 import { Player } from "../src/player";
 import { GameLoop } from "../src/gameloop";
 
