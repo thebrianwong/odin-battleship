@@ -105,7 +105,11 @@ test("6) The Computer Player attacks after the Human Player attacks", () => {
   targetCellHuman.dataset.column = "0";
   humanGameboardDOM.appendChild(targetCellHuman);
 
-  jest.spyOn(Math, "random").mockReturnValueOnce(0).mockReturnValueOnce(0);
+  jest
+    .spyOn(Math, "random")
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0);
   jest.useFakeTimers();
   humanPlayer.sendAttack([0, 0]);
   jest.advanceTimersByTime(1000);
@@ -123,6 +127,8 @@ test("7) The game ends after a Player loses all their Ships", () => {
   const humanPlayer = GameLoop.getPlayers()[0];
   jest
     .spyOn(Math, "random")
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
@@ -188,6 +194,8 @@ test("8) The game know which Player won after the game ends", () => {
     .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
     .mockReturnValueOnce(0.1);
   humanPlayer.addShipToGameboard(2, [
     [0, 0],
@@ -245,6 +253,8 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   const humanPlayer = GameLoop.getPlayers()[0];
   jest
     .spyOn(Math, "random")
+    .mockReturnValueOnce(0)
+    .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
     .mockReturnValueOnce(0)
