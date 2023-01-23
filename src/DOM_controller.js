@@ -183,17 +183,27 @@ const DOMController = (() => {
     imageElement.classList.add("disabled-image");
     buttonElement.disabled = true;
   };
+  const createErrorMessage = () => {
+    const errorMessage = document.createElement("p");
+    errorMessage.textContent = "That is an invalid position.";
+    errorMessage.classList.add("error-message");
+    document.body.appendChild(errorMessage);
+    setTimeout(() => {
+      document.body.removeChild(errorMessage);
+    }, 2500);
+  };
   const insertDraggedImage = (event) => {
     event.preventDefault();
     const humanPlayerObject = GameLoop.getPlayers()[0];
     const targetCell = event.target;
     if (Array.from(targetCell.classList).includes("contains-ship-image")) {
+      createErrorMessage();
       return;
     }
     const dataString = event.dataTransfer.getData("image");
     const dataObject = JSON.parse(dataString);
     if (!isValidGameboardCell(targetCell, dataObject)) {
-      // probably make some DOM error message appear
+      createErrorMessage();
       return;
     }
     const shipCoordinates = addShipToDOM(targetCell, dataObject);
