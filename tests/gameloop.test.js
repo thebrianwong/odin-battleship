@@ -9,7 +9,7 @@ import { GameLoop } from "../src/gameloop";
 import { DOMController } from "../src/DOM_controller";
 
 afterEach(() => {
-  GameLoop.resetGame();
+  GameLoop.resetGameLoopState();
 });
 
 test("1) Create a new game with a human Player and a computer Player", () => {
@@ -302,7 +302,7 @@ test("9) The game can reset itself after it ends and the player wants to play ag
   expect(GameLoop.isInProgress()).toBeFalsy();
   expect(GameLoop.getWinner()).toBeDefined();
   GameLoop.resetGame();
-  expect(GameLoop.getPlayers().length).toBe(0);
+  expect(GameLoop.getPlayers().length).toBe(2);
   expect(GameLoop.isInProgress()).toBeTruthy();
   expect(GameLoop.getWinner()).toBeUndefined();
   document.body.innerHTML = "";

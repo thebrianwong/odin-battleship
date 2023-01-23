@@ -8,7 +8,7 @@ import { Player } from "../src/player";
 import { GameLoop } from "../src/gameloop";
 
 afterEach(() => {
-  GameLoop.resetGame();
+  GameLoop.resetGameLoopState();
 });
 
 test("1) Create a Player", () => {
