@@ -265,9 +265,9 @@ const DOMController = (() => {
     attackResultsElement.classList.add("attack-results");
     targetCell.appendChild(attackResultsElement);
     if (attackResults === "hit") {
-      attackResultsElement.setAttribute("src", "../dist/red_X.png");
+      attackResultsElement.setAttribute("src", "./red_X.png");
     } else {
-      attackResultsElement.setAttribute("src", "../dist/white_O.png");
+      attackResultsElement.setAttribute("src", "./white_O.png");
     }
     targetCell.disabled = true;
   };
