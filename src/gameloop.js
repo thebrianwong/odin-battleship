@@ -51,6 +51,7 @@ const GameLoop = (() => {
     createGame,
     endGame,
     resetGame,
+    resetGameLoopState,
   };
 })();
 
