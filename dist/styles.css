@@ -303,3 +303,18 @@ button.gameboard-cell:enabled:active {
   width: 95%;
   height: 95%;
 }
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: red;
+  color: white;
+  text-align: center;
+  border: solid 1px black;
+  top: calc(50vh - 25px);
+  left: calc(50vw - 75px);
+  width: 150px;
+  height: 50px;
+}
