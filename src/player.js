@@ -64,10 +64,11 @@ const Player = (playerType) => {
     }
     if (opposingPlayer.isComputer()) {
       GameLoop.toggleMidAttack(true);
+      const randomDelay = (Math.floor(Math.random() * 4) + 1) * 1000;
       setTimeout(() => {
         GameLoop.toggleMidAttack(false);
         opposingPlayer.sendComputerAttack();
-      }, 1000);
+      }, randomDelay);
     }
   };
   const initializeComputerGameboard = () => {
