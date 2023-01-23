@@ -217,11 +217,6 @@ button:hover:enabled {
   background-position: -33px;
 }
 
-img {
-  width: 100px;
-  height: fit-content;
-}
-
 .horizontal {
   transform: rotate(0);
 }
